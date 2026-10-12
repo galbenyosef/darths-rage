@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-12T23:38:49.290Z",
+  "generated": "2026-10-12T23:42:48.174Z",
   "origin": "https://darths-rage.netlify.app",
   "files": {
     "blaster.mp3": {
@@ -9,6 +9,82 @@
     "breathing.mp3": {
       "bytes": 171199,
       "sha256": "7adced41e733dbdf0dae8ab71d827aed8a404772aa5c00361cb02cba1e849b4d"
+    },
+    "courier-geometry.json": {
+      "bytes": 1895946,
+      "sha256": "0fc38d1356a4a4229659be25eb4ddafc5fa9a092b0bf2f3395c9a579c5cfbbab"
+    },
+    "courier-model.json": {
+      "bytes": 6350,
+      "sha256": "4ccbf8d7b7fed2bd72c846bbe7db9a16869db0fa07112e4d1ac12b085d0739bb"
+    },
+    "courier-tex.webp": {
+      "bytes": 63994,
+      "sha256": "22f46d8c5ea024492efad853bc902d4d3fa9f6715e6fd0a533e82dafe4d30894"
+    },
+    "courier-tex_.webp": {
+      "bytes": 63056,
+      "sha256": "c1f1cd7ee19f94105b147a8670f6fc1cff6aa76a89d9f5aa4d69cf51a15a95a9"
+    },
+    "courier-tex__.webp": {
+      "bytes": 59184,
+      "sha256": "de982925cfa63f2c28ced4d1f025f41a9de5f05a1f83ff9ea3e2151e65fe433d"
+    },
+    "courier-tex___.webp": {
+      "bytes": 65242,
+      "sha256": "7a74128f287d5b0927217108fcc7e234fbd0e4d94ce275088e5f3ac19a53000f"
+    },
+    "courier-tex____.webp": {
+      "bytes": 59500,
+      "sha256": "ba230cb5a6fafbd68fafac39f7402ea9b8753480075e540eb176bf3ada9f5281"
+    },
+    "courier-tex_____.webp": {
+      "bytes": 58030,
+      "sha256": "cf4528b1587b562aced0b5e86364b6c24bcb195247e8538676ba86b0dc5c4241"
+    },
+    "courier-tex______.webp": {
+      "bytes": 66526,
+      "sha256": "ab419bf78da634ae21b2f17ff5b46e73a9a731d4f0ebaefabe6d7e236182e238"
+    },
+    "crate-geometry.json": {
+      "bytes": 1486346,
+      "sha256": "904373312deafd25fdbf4a81b92b2d5dfa36110f94785f04c26438149928e8ee"
+    },
+    "crate-model.json": {
+      "bytes": 7140,
+      "sha256": "9a8e1c2dde20d3c435c6d9cf9b773eb15ce013fb3e4c01f61b7ad5eec6a50915"
+    },
+    "crate-tex.webp": {
+      "bytes": 18988,
+      "sha256": "8b3313e538455bd1665cca7c94da89fab7e37d0bfa829b71b1327d7cc3d8e6e3"
+    },
+    "crate-tex_.webp": {
+      "bytes": 18544,
+      "sha256": "8645b6d908ac88d8488a88bc94f4bf3e80689fcfc340b9819b8ff14eeceef2b9"
+    },
+    "crate-tex__.webp": {
+      "bytes": 17474,
+      "sha256": "a70154fda3ecd3c8397fcae4975aee17c13b71f50f3a9c6398876fcfbbe6b6cc"
+    },
+    "crate-tex___.webp": {
+      "bytes": 19064,
+      "sha256": "074376ebf4341daa06bf562a73aeefc7012801f737d60febadc459828d917914"
+    },
+    "crate-tex____.webp": {
+      "bytes": 19324,
+      "sha256": "0a8ac21253046a0f1c637f0872fe753d71f66c4950382d4bac95c8c8c53bf3a5"
+    },
+    "crate-tex_____.webp": {
+      "bytes": 19616,
+      "sha256": "15923f8021875e92e0b1afdf2b59f38a1ceec388ab9127ec576e87392068b5ba"
+    },
+    "crate-tex______.webp": {
+      "bytes": 17768,
+      "sha256": "4e67ed1d19c5e1d33428d12ef02f3ad4bd85487b0293166c4e7338877288fd75"
+    },
+    "crate-tex_______.webp": {
+      "bytes": 19208,
+      "sha256": "8c933f035c5387542dc2117913153aed45098bd56745af71cc26067ae8b91eb9"
     },
     "deflect0.mp3": {
       "bytes": 13165,
@@ -49,6 +125,10 @@
     "deflect9.mp3": {
       "bytes": 11337,
       "sha256": "1fd6fa38f15a34268874db5ea8fa55d7da8c2677c6ed3c5811bbf116bcdb0795"
+    },
+    "favicon.ico": {
+      "bytes": 15086,
+      "sha256": "d029ee2f8b418ee988836acac9bb63b82be5e23d285c52d1f1afdfe3e546f4fe"
     },
     "hum_loop.mp3": {
       "bytes": 803884,
@@ -189,6 +269,26 @@
     "swing9.mp3": {
       "bytes": 7680,
       "sha256": "2171d4b7233872c99056e048b09c170e7909fcda72b78a88ee456f229d53a141"
+    },
+    "trooper-Image_0.webp": {
+      "bytes": 97166,
+      "sha256": "5a95ca36eef4f121712b5f4f5ba2f6fd475c51152f840c2a6f7978db076b18f4"
+    },
+    "trooper-Image_1.webp": {
+      "bytes": 49188,
+      "sha256": "e9446ca5dc2fecf68818b559536c245658dcc471d16906248d2a33a2cc5fc90d"
+    },
+    "trooper-Image_2.webp": {
+      "bytes": 35204,
+      "sha256": "e48eaaba79f00c95db6dee82149213f425a8265e91c1382b83c38462baf13798"
+    },
+    "trooper-geometry.json": {
+      "bytes": 1135114,
+      "sha256": "2e8eb75841c1b8cea4d18945b2f2ddb4017b601a491ff613d288835be9083389"
+    },
+    "trooper-model.json": {
+      "bytes": 136235,
+      "sha256": "2c3f78dd7a11f2a6f808772bc8c71ec83e05ab1473d57e8666ac1e2de6270db8"
     }
   }
 }

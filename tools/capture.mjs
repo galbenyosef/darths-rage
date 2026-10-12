@@ -24,6 +24,18 @@
 // (KNOWN below) because the static scanner cannot see the loop index:
 //   - deflection whooshes: `load('deflect'+i+'.mp3')` for i in 0..9
 //   - swing whooshes:      `load('swing'+i+'.mp3')`   for i in 0..21
+//   - character/prop models: a generic loader builds `<prefix>-model.json` /
+//     `<prefix>-geometry.json` — the literal login is `prefix+'-geometry.json'`
+//     (its bare fragment is what the scanner would wrongly probe as
+//     "-geometry.json"), and the concrete prefixes are the four families the
+//     game instantiates: sevrane (a direct literal in loadSevrane), trooper,
+//     courier and crate. The model JSONs then list their own texture images
+//     (trooper-Image_N.webp, courier-tex*.webp, crate-tex*.webp), which the
+//     JSON scan closes over. This model bank was found by the opencli browser
+//     network-log cross-check during the boot test (the local serve log showed
+//     /trooper-model.json, /courier-*.json and /crate-*.json 404ing while the
+//     game ran) — exactly the closure gap a literal scan alone misses.
+//   - favicon.ico: browser-implicit root request; upstream serves a real one.
 //
 // Every referenced-but-missing same-origin file is fetched until a scan round
 // finds none; 404s are recorded as unresolved gaps in _mirror-report.json (and
@@ -48,11 +60,15 @@ const ORIGIN = "https://darths-rage.netlify.app";
 const ENTRY = "index.html"; // served at the origin root; capture at repo root (DISK_PREFIX = "")
 const UA = { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/126.0" };
 
-// runtime-instantiated template targets (see header) — the loop indices the
-// literal scanner cannot resolve; every concrete value is enumerated.
+// runtime-instantiated template targets (see header) — the loop indices and
+// loader prefixes the literal scanner cannot resolve; every concrete value is
+// enumerated.
 const KNOWN = [
   ...Array.from({ length: 10 }, (_, i) => `deflect${i}.mp3`),
   ...Array.from({ length: 22 }, (_, i) => `swing${i}.mp3`),
+  // the four model families the generic loader instantiates
+  ...["sevrane", "trooper", "courier", "crate"].flatMap((p) => [`${p}-model.json`, `${p}-geometry.json`]),
+  "favicon.ico",
 ];
 
 // strings that look like asset paths but are not fetched refs
