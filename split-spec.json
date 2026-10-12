@@ -1,0 +1,941 @@
+{
+  "project": "darths-rage",
+  "kind": "statement-aligned-slices",
+  "defaultFile": "src/index-inline-1-01.js",
+  "note": "RAGE (https://darths-rage.netlify.app/) is capture-class: a single-file three.js action game served by Netlify at the origin root. §0.4 fork-over-mirror was checked on 2026-10-13 — no public upstream repo exists (the page carries no github/gitlab/bitbucket reference; a GitHub search finds only unrelated projects), so the mirror stands. Derived pipeline: capture → pinned prettier 3.9.6 (module API, default options, single pass verified idempotent — never the CLI: it respects .gitignore and can silently echo its input) → the entry document's inline <script> becomes readable/index-inline-1.pretty.js and its two inline <style> blocks become readable/index-inline-2|3.pretty.css (every pretty provably NOT byte-identical to its capture block; readable/index-inline-map.json records each block's exact byte range + sha256). The inline script is a SINGLE top-level IIFE (`(() => { … })();`): statement-aligned slices src/index-inline-1-NN.js are cut at the IIFE body's top-level statement boundaries (~250-350 line windows; oversized single declarations stay whole) with an exact 2-line provenance header; the IIFE wrapper head/tail and body statements that are not standalone at module top level (the engine guard contains a top-level `return`) are skipped sections, indexed but never sliced. Every slice parses standalone under `node --input-type=module --check -` and round-trips byte-exact to its recorded readable line range. Stylesheet rule — the two inline <style> blocks are wholeFile sections, never sliced. Non-code payloads (MP3 audio, WebP images, favicon.ico and the twelve glTF model/geometry JSON payloads) are hashed notRendered records (bytes + sha256, no pretty pass). The CDN dependencies (nine jsdelivr three.js r147 scripts, the Google Fonts stylesheet) were never captured (socker precedent, PLAN §1) and have no derived layer; tools/capture.mjs --check lists them as external off-origin references. Identifiers in src/ are the bundle's own minified names — the rename campaign (PLAN §5) is recorded as an open task in README.md, not claimed here. Capture bytes are untouched by everything above; re-cut with `node tools/derive.mjs` after any capture refresh. `node tools/audit.js` is the gate.",
+  "renderOptions": {
+    "_default": "prettier 3.9.6, module API, default options, single pass (re-format verified idempotent at derive time) — never the CLI: it respects .gitignore and can silently echo its input",
+    "js": "parser babel, no plugins (inline <script>)",
+    "css": "parser css, no plugins (inline <style>)",
+    "json": "parser json, no plugins (inline importmap blocks, if any)"
+  },
+  "source": "readable/: 3 inline twin(s) (1 script → 28 statement-aligned slices, 2 CSS pretties wholeFile); src/: 28 statement-aligned slice(s); 5 skipped section(s); 2 wholeFile section(s); capture: 72 files under .upstream/manifest.json; inline scan: index.html (3 content block(s)); notRendered: 71 hashed payload record(s).",
+  "inline": {
+    "scanned": [
+      "index.html"
+    ],
+    "contentBlocks": 3,
+    "notRendered": 0,
+    "note": "the entry document carries one inline <script> (the whole game, 170,041 B) and two inline <style> blocks; every content block has a readable twin recorded in readable/index-inline-map.json with its exact byte range + sha256. The nine external <script src> loads (jsdelivr three.js r147) are CDN dependencies and are not derived."
+  },
+  "sources": [
+    {
+      "sourceFile": "readable/index-inline-1.pretty.css",
+      "capture": "index.html",
+      "captureKind": "inline-style",
+      "captureByteStart": 756,
+      "captureByteEnd": 8984,
+      "captureSha256": "734404333d2b4cf7c8cd6383af499f947cfb9a1a800e1e0a2065268b161abbd3",
+      "captureBytes": 8228,
+      "prettyLines": 508,
+      "prettyBytes": 10158,
+      "prettySha256": "682a344e30a7dde59ead4a1f48a759b2ade3864b3ce9295e365bea5c061903ed",
+      "tag": "index-inline-1",
+      "slices": 0,
+      "derived": "readable only (inline block, wholeFile)"
+    },
+    {
+      "sourceFile": "readable/index-inline-2.pretty.css",
+      "capture": "index.html",
+      "captureKind": "inline-style",
+      "captureByteStart": 9000,
+      "captureByteEnd": 9063,
+      "captureSha256": "476b9e5dae6297da83ae5a18c3033b71c14cc0e6adc29cbbe710379ad4ac8846",
+      "captureBytes": 63,
+      "prettyLines": 7,
+      "prettyBytes": 84,
+      "prettySha256": "94d9d9420bac6d85469f96feecf7a4ab1fa41e7efbf4b93cdf607ef6cccd075e",
+      "tag": "index-inline-2",
+      "slices": 0,
+      "derived": "readable only (inline block, wholeFile)"
+    },
+    {
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "capture": "index.html",
+      "captureKind": "inline-script",
+      "captureByteStart": 12888,
+      "captureByteEnd": 182943,
+      "captureSha256": "72e31dbe9ebd857a203442bc0ebd92504edff0af58614734b8a78dfbc6f935aa",
+      "captureBytes": 170055,
+      "prettyLines": 7869,
+      "prettyBytes": 239712,
+      "prettyPasses": 1,
+      "idempotent": true,
+      "tag": "index-inline-1",
+      "slicingMode": "iife-body",
+      "slices": 28,
+      "derived": "readable + 28 statement-aligned slice(s) + 5 skipped section(s)"
+    }
+  ],
+  "sections": [
+    {
+      "file": "index-inline-1.css",
+      "wholeFile": true,
+      "title": "index-inline-1 — inline style block (whole-file, never sliced)",
+      "desc": "Lines 1-508 of readable/index-inline-1.pretty.css. Whole-file: the entry document's inline style block (8228 B at bytes 756-8984 of index.html) is indexed whole and never sliced.",
+      "note": "whole-file (entry inline style block, not sliced)",
+      "startLine": 1,
+      "endLine": 508,
+      "sourceFile": "readable/index-inline-1.pretty.css"
+    },
+    {
+      "file": "index-inline-2.css",
+      "wholeFile": true,
+      "title": "index-inline-2 — inline style block (whole-file, never sliced)",
+      "desc": "Lines 1-7 of readable/index-inline-2.pretty.css. Whole-file: the entry document's inline style block (63 B at bytes 9000-9063 of index.html) is indexed whole and never sliced.",
+      "note": "whole-file (entry inline style block, not sliced)",
+      "startLine": 1,
+      "endLine": 7,
+      "sourceFile": "readable/index-inline-2.pretty.css"
+    },
+    {
+      "file": "index-inline-1-wrapper-head.js",
+      "skipped": true,
+      "title": "index-inline-1 — IIFE wrapper head (non-standalone, not sliced)",
+      "desc": "Lines 1-1. The inline script opens with a single top-level IIFE (`(() => {`); the wrapper head is not standalone, so it is indexed only. Slices are cut inside the body (iife-body); the directive prologue heads the first slice.",
+      "startLine": 1,
+      "endLine": 1,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "firstLine": "(() => {",
+      "lastLine": "(() => {"
+    },
+    {
+      "file": "index-inline-1-01.js",
+      "title": "index-inline-1 01 — getelementbyid",
+      "desc": "Lines 2-3. Markers: getelementbyid(1).",
+      "startLine": 2,
+      "endLine": 3,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-nonstandalone-3.js",
+      "skipped": true,
+      "title": "index-inline-1 — non-standalone statement (top-level return, not sliced)",
+      "desc": "Lines 4-9. This statement is only valid inside the IIFE (it contains a top-level `return`), so it is indexed only — it would not parse standalone.",
+      "startLine": 4,
+      "endLine": 11,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "firstLine": "  if (!window.THREE || !THREE.EffectComposer) {",
+      "lastLine": "  /* ================= helpers ================= */"
+    },
+    {
+      "file": "index-inline-1-02.js",
+      "title": "index-inline-1 02 — math",
+      "desc": "Lines 12-31. Markers: math(7), matches(2).",
+      "startLine": 12,
+      "endLine": 31,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-nonstandalone-16.js",
+      "skipped": true,
+      "title": "index-inline-1 — non-standalone statement (top-level return, not sliced)",
+      "desc": "Lines 32-41. This statement is only valid inside the IIFE (it contains a top-level `return`), so it is indexed only — it would not parse standalone.",
+      "startLine": 32,
+      "endLine": 41,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "firstLine": "  try {",
+      "lastLine": "  }"
+    },
+    {
+      "file": "index-inline-1-03.js",
+      "title": "index-inline-1 03 — fillstyle",
+      "desc": "Lines 42-387. Markers: fillstyle(34), fillrect(30).",
+      "startLine": 42,
+      "endLine": 387,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-04.js",
+      "title": "index-inline-1 04 — three",
+      "desc": "Lines 388-590. Markers: three(55), color(42).",
+      "startLine": 388,
+      "endLine": 590,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-05.js",
+      "title": "index-inline-1 05 — three",
+      "desc": "Oversized single declaration (kept whole). Lines 591-955. Markers: three(33), sec(24).",
+      "startLine": 591,
+      "endLine": 955,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-06.js",
+      "title": "index-inline-1 06 — three",
+      "desc": "Lines 956-1180. Markers: three(25), math(20).",
+      "startLine": 956,
+      "endLine": 1180,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-07.js",
+      "title": "index-inline-1 07 — three",
+      "desc": "Lines 1181-1524. Markers: three(47), add(26).",
+      "startLine": 1181,
+      "endLine": 1524,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-08.js",
+      "title": "index-inline-1 08 — three",
+      "desc": "Lines 1525-1767. Markers: three(29), math(24).",
+      "startLine": 1525,
+      "endLine": 1767,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-09.js",
+      "title": "index-inline-1 09 — three",
+      "desc": "Lines 1768-2114. Markers: three(64), body(23).",
+      "startLine": 1768,
+      "endLine": 2114,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-10.js",
+      "title": "index-inline-1 10 — three",
+      "desc": "Lines 2115-2379. Markers: three(28), sev(23).",
+      "startLine": 2115,
+      "endLine": 2379,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-11.js",
+      "title": "index-inline-1 11 — sev",
+      "desc": "Lines 2380-2671. Markers: sev(94), three(26).",
+      "startLine": 2380,
+      "endLine": 2671,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-12.js",
+      "title": "index-inline-1 12 — three",
+      "desc": "Lines 2672-3017. Markers: three(26), add(17).",
+      "startLine": 2672,
+      "endLine": 3017,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-13.js",
+      "title": "index-inline-1 13 — three",
+      "desc": "Lines 3018-3263. Markers: three(28), math(11).",
+      "startLine": 3018,
+      "endLine": 3263,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-14.js",
+      "title": "index-inline-1 14 — pos",
+      "desc": "Lines 3264-3431. Markers: pos(47), math(24).",
+      "startLine": 3264,
+      "endLine": 3431,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-15.js",
+      "title": "index-inline-1 15 — getworldposition",
+      "desc": "Lines 3432-3779. Markers: getworldposition(22), side(21).",
+      "startLine": 3432,
+      "endLine": 3779,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-16.js",
+      "title": "index-inline-1 16 — connect",
+      "desc": "Lines 3780-4117. Markers: connect(22), rnd(16).",
+      "startLine": 3780,
+      "endLine": 4117,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-17.js",
+      "title": "index-inline-1 17 — src",
+      "desc": "Lines 4118-4227. Markers: src(11), connect(8).",
+      "startLine": 4118,
+      "endLine": 4227,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-nonstandalone-242.js",
+      "skipped": true,
+      "title": "index-inline-1 — non-standalone statement (top-level return, not sliced)",
+      "desc": "Lines 4228-4440. This statement is only valid inside the IIFE (it contains a top-level `return`), so it is indexed only — it would not parse standalone.",
+      "startLine": 4228,
+      "endLine": 4442,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "firstLine": "  const sfx = {",
+      "lastLine": "  /* ================= state ================= */"
+    },
+    {
+      "file": "index-inline-1-18.js",
+      "title": "index-inline-1 18 — player",
+      "desc": "Lines 4443-4791. Markers: player(22), key(14).",
+      "startLine": 4443,
+      "endLine": 4791,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-19.js",
+      "title": "index-inline-1 19 — pos",
+      "desc": "Lines 4792-5026. Markers: pos(18), rnd(16).",
+      "startLine": 4792,
+      "endLine": 5026,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-20.js",
+      "title": "index-inline-1 20 — three",
+      "desc": "Lines 5027-5307. Markers: three(24), math(17).",
+      "startLine": 5027,
+      "endLine": 5307,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-21.js",
+      "title": "index-inline-1 21 — pos",
+      "desc": "Lines 5308-5622. Markers: pos(42), math(29).",
+      "startLine": 5308,
+      "endLine": 5622,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-22.js",
+      "title": "index-inline-1 22 — lerp",
+      "desc": "Lines 5623-5948. Markers: lerp(35), math(32).",
+      "startLine": 5623,
+      "endLine": 5948,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-23.js",
+      "title": "index-inline-1 23 — pos",
+      "desc": "Oversized single declaration (kept whole). Lines 5949-6379. Markers: pos(50), math(47).",
+      "startLine": 5949,
+      "endLine": 6379,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-24.js",
+      "title": "index-inline-1 24 — pos",
+      "desc": "Lines 6380-6688. Markers: pos(55), math(33).",
+      "startLine": 6380,
+      "endLine": 6688,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-25.js",
+      "title": "index-inline-1 25 — math",
+      "desc": "Lines 6689-6997. Markers: math(28), card(18).",
+      "startLine": 6689,
+      "endLine": 6997,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-26.js",
+      "title": "index-inline-1 26 — math",
+      "desc": "Lines 6998-7274. Markers: math(28), position(28).",
+      "startLine": 6998,
+      "endLine": 7274,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-27.js",
+      "title": "index-inline-1 27 — camstate",
+      "desc": "Lines 7275-7606. Markers: camstate(37), pos(35).",
+      "startLine": 7275,
+      "endLine": 7606,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-28.js",
+      "title": "index-inline-1 28 — mode",
+      "desc": "Lines 7607-7868. Markers: mode(32), player(24).",
+      "startLine": 7607,
+      "endLine": 7868,
+      "sourceFile": "readable/index-inline-1.pretty.js"
+    },
+    {
+      "file": "index-inline-1-wrapper-tail.js",
+      "skipped": true,
+      "title": "index-inline-1 — IIFE wrapper tail (non-standalone, not sliced)",
+      "desc": "Lines 7869-7869. The IIFE invocation tail (`})();`) is not standalone, so it is indexed only.",
+      "startLine": 7869,
+      "endLine": 7869,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "firstLine": "})();",
+      "lastLine": "})();"
+    }
+  ],
+  "notRendered": [
+    {
+      "capture": "blaster.mp3",
+      "kind": "audio",
+      "bytes": 16344,
+      "sha256": "56687b08d1290ea7e9154f220ddc2c1086ac21291357dc4d7279966a3aad36f8",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "breathing.mp3",
+      "kind": "audio",
+      "bytes": 171199,
+      "sha256": "7adced41e733dbdf0dae8ab71d827aed8a404772aa5c00361cb02cba1e849b4d",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "courier-geometry.json",
+      "kind": "data",
+      "bytes": 1895946,
+      "sha256": "0fc38d1356a4a4229659be25eb4ddafc5fa9a092b0bf2f3395c9a579c5cfbbab",
+      "rendered": false,
+      "reason": "data payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "courier-model.json",
+      "kind": "data",
+      "bytes": 6350,
+      "sha256": "4ccbf8d7b7fed2bd72c846bbe7db9a16869db0fa07112e4d1ac12b085d0739bb",
+      "rendered": false,
+      "reason": "data payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "courier-tex.webp",
+      "kind": "image",
+      "bytes": 63994,
+      "sha256": "22f46d8c5ea024492efad853bc902d4d3fa9f6715e6fd0a533e82dafe4d30894",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "courier-tex_.webp",
+      "kind": "image",
+      "bytes": 63056,
+      "sha256": "c1f1cd7ee19f94105b147a8670f6fc1cff6aa76a89d9f5aa4d69cf51a15a95a9",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "courier-tex__.webp",
+      "kind": "image",
+      "bytes": 59184,
+      "sha256": "de982925cfa63f2c28ced4d1f025f41a9de5f05a1f83ff9ea3e2151e65fe433d",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "courier-tex___.webp",
+      "kind": "image",
+      "bytes": 65242,
+      "sha256": "7a74128f287d5b0927217108fcc7e234fbd0e4d94ce275088e5f3ac19a53000f",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "courier-tex____.webp",
+      "kind": "image",
+      "bytes": 59500,
+      "sha256": "ba230cb5a6fafbd68fafac39f7402ea9b8753480075e540eb176bf3ada9f5281",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "courier-tex_____.webp",
+      "kind": "image",
+      "bytes": 58030,
+      "sha256": "cf4528b1587b562aced0b5e86364b6c24bcb195247e8538676ba86b0dc5c4241",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "courier-tex______.webp",
+      "kind": "image",
+      "bytes": 66526,
+      "sha256": "ab419bf78da634ae21b2f17ff5b46e73a9a731d4f0ebaefabe6d7e236182e238",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-geometry.json",
+      "kind": "data",
+      "bytes": 1486346,
+      "sha256": "904373312deafd25fdbf4a81b92b2d5dfa36110f94785f04c26438149928e8ee",
+      "rendered": false,
+      "reason": "data payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-model.json",
+      "kind": "data",
+      "bytes": 7140,
+      "sha256": "9a8e1c2dde20d3c435c6d9cf9b773eb15ce013fb3e4c01f61b7ad5eec6a50915",
+      "rendered": false,
+      "reason": "data payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-tex.webp",
+      "kind": "image",
+      "bytes": 18988,
+      "sha256": "8b3313e538455bd1665cca7c94da89fab7e37d0bfa829b71b1327d7cc3d8e6e3",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-tex_.webp",
+      "kind": "image",
+      "bytes": 18544,
+      "sha256": "8645b6d908ac88d8488a88bc94f4bf3e80689fcfc340b9819b8ff14eeceef2b9",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-tex__.webp",
+      "kind": "image",
+      "bytes": 17474,
+      "sha256": "a70154fda3ecd3c8397fcae4975aee17c13b71f50f3a9c6398876fcfbbe6b6cc",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-tex___.webp",
+      "kind": "image",
+      "bytes": 19064,
+      "sha256": "074376ebf4341daa06bf562a73aeefc7012801f737d60febadc459828d917914",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-tex____.webp",
+      "kind": "image",
+      "bytes": 19324,
+      "sha256": "0a8ac21253046a0f1c637f0872fe753d71f66c4950382d4bac95c8c8c53bf3a5",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-tex_____.webp",
+      "kind": "image",
+      "bytes": 19616,
+      "sha256": "15923f8021875e92e0b1afdf2b59f38a1ceec388ab9127ec576e87392068b5ba",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-tex______.webp",
+      "kind": "image",
+      "bytes": 17768,
+      "sha256": "4e67ed1d19c5e1d33428d12ef02f3ad4bd85487b0293166c4e7338877288fd75",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "crate-tex_______.webp",
+      "kind": "image",
+      "bytes": 19208,
+      "sha256": "8c933f035c5387542dc2117913153aed45098bd56745af71cc26067ae8b91eb9",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect0.mp3",
+      "kind": "audio",
+      "bytes": 13165,
+      "sha256": "db49597a1424d50c267489a16dc819a5f7e567e4eb6fc3f21272079e0dd084c3",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect1.mp3",
+      "kind": "audio",
+      "bytes": 12800,
+      "sha256": "9e5bda6b1b6aec38b09345f79410398f18af295852995eb818e26415308bacd0",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect2.mp3",
+      "kind": "audio",
+      "bytes": 16091,
+      "sha256": "47c6cdc61084db92366f4498b5fda432ffe610bc6e1928b766c20bf671101dcf",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect3.mp3",
+      "kind": "audio",
+      "bytes": 10971,
+      "sha256": "0f417271c9fb4512c2ea35190c8a0f38870e826c80eebbcd44cd93ef780e8528",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect4.mp3",
+      "kind": "audio",
+      "bytes": 13897,
+      "sha256": "f8176363420d64ccd6991f23342ca06fbad4cee82a308f85359fd0d595bd25f8",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect5.mp3",
+      "kind": "audio",
+      "bytes": 14263,
+      "sha256": "b280dda52e964224472d9b09f3a925cf4e5a28ea51ac3f1c4a0375053cd3c7e4",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect6.mp3",
+      "kind": "audio",
+      "bytes": 7314,
+      "sha256": "47d2ffeb550954c0fe10f18b8e70f4c6c70ada57e515ddc8d73feee2c2175a51",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect7.mp3",
+      "kind": "audio",
+      "bytes": 13897,
+      "sha256": "e39e24e0975e16a3a53f5108acd30bd2ea00148f52603924d0e37b7a4c931bbb",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect8.mp3",
+      "kind": "audio",
+      "bytes": 9508,
+      "sha256": "578b27a236ead8d1c82c8af8d865af5de656961efbd48c1cf8e9374442ff7b26",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "deflect9.mp3",
+      "kind": "audio",
+      "bytes": 11337,
+      "sha256": "1fd6fa38f15a34268874db5ea8fa55d7da8c2677c6ed3c5811bbf116bcdb0795",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "favicon.ico",
+      "kind": "image",
+      "bytes": 15086,
+      "sha256": "d029ee2f8b418ee988836acac9bb63b82be5e23d285c52d1f1afdfe3e546f4fe",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "hum_loop.mp3",
+      "kind": "audio",
+      "bytes": 803884,
+      "sha256": "ba6567fe7faabc2062e521fa27ff62c84b883f7c449968f64cc3e82d5db35956",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "hum_start.mp3",
+      "kind": "audio",
+      "bytes": 15038,
+      "sha256": "0729b8e28154653af9f5a917b0c941bae740ed25c5f811885784e51243f45a36",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "ignition.mp3",
+      "kind": "audio",
+      "bytes": 43929,
+      "sha256": "0c3f1f5bd11222b520fcf792bed975e5f2bd003ff68d55060ecbbdeaa884a8b2",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "logo.webp",
+      "kind": "image",
+      "bytes": 171234,
+      "sha256": "3a010cce304720479326144bc7cbac0d23f276ce3291084cb7afbed4551d0147",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "music.mp3",
+      "kind": "audio",
+      "bytes": 1127445,
+      "sha256": "1290a906ff52896a94435ea81a1a32d7e4ed97d010b86b5e9fbfb29e6c9a0bd5",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "sevrane-Image_0.webp",
+      "kind": "image",
+      "bytes": 387544,
+      "sha256": "9b69e5dcbc114d95a0f4801476ad46bd88df537340468603a7c8c855ed769b5e",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "sevrane-Image_1.webp",
+      "kind": "image",
+      "bytes": 96700,
+      "sha256": "e28c53f08267c0cfc79b196a0ca5e3849a1a50319ff0ca6e957ce1f768ee468c",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "sevrane-Image_2.webp",
+      "kind": "image",
+      "bytes": 235970,
+      "sha256": "dc8acf0e1e5aefb7529eed13d50b3eb83982425fbc46d9ef2b1524b30a0a00a1",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "sevrane-geometry.json",
+      "kind": "data",
+      "bytes": 3833126,
+      "sha256": "a7f3d7b5e774d9ece71b14a63c9a806d2af702576fc463e2995e8d64edb277c1",
+      "rendered": false,
+      "reason": "data payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "sevrane-model.json",
+      "kind": "data",
+      "bytes": 102276,
+      "sha256": "d3aa2f07761c625ffeb56a274479667b4056eb93c456db6472b7533008781fad",
+      "rendered": false,
+      "reason": "data payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "spin.mp3",
+      "kind": "audio",
+      "bytes": 45453,
+      "sha256": "bb4ca77d94b3f7c295a9c2ee2a4c2e4306e4237957edd6ded982d4e2a93ea949",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "stress.mp3",
+      "kind": "audio",
+      "bytes": 99474,
+      "sha256": "27088141497cc94025eaa69cb2230da8560d529969c1ee3178f4d2bc9a1619e7",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing0.mp3",
+      "kind": "audio",
+      "bytes": 9143,
+      "sha256": "a376945b3412f1a4e8cac33700b88bdea4ea4c579e8d2f384c44b32cb6e77adf",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing1.mp3",
+      "kind": "audio",
+      "bytes": 9143,
+      "sha256": "01a00d2a5f8e2018cd266366ab58570150985cf5da1ba7889927efa736c83e12",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing10.mp3",
+      "kind": "audio",
+      "bytes": 6217,
+      "sha256": "1023bc2e715519c811c90c82c713e4e4515532fe8884554bd5b053adc407dc04",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing11.mp3",
+      "kind": "audio",
+      "bytes": 7680,
+      "sha256": "9385e9b61f428e8af7db83bea2ce2592ad1e025eb233469602a4843cd15b27c4",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing12.mp3",
+      "kind": "audio",
+      "bytes": 6217,
+      "sha256": "326279854ae41cd04e851a52eee9c1c382050425810d9489c8b7192fe387848f",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing13.mp3",
+      "kind": "audio",
+      "bytes": 6948,
+      "sha256": "747443eaeb048e3a25f5ef3bafd9b44078195e6cc770f41383894d17402d437f",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing14.mp3",
+      "kind": "audio",
+      "bytes": 6583,
+      "sha256": "d209800b2112db598d17c4e45159ec39bdbceb049115521aec41f563a072e0a1",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing15.mp3",
+      "kind": "audio",
+      "bytes": 6948,
+      "sha256": "5d03c5811acde27685123d660e85a46e4425bfc24794f735d31c7df22d0faaee",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing16.mp3",
+      "kind": "audio",
+      "bytes": 7680,
+      "sha256": "5ac8ff834023b02a9f622083ff8f2ec2bfb927bc03578fc5e8d059ac33361513",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing17.mp3",
+      "kind": "audio",
+      "bytes": 6217,
+      "sha256": "763946d71af0bbedccb392a0f27f36883b42ba227189d5e63feec171a0c37707",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing18.mp3",
+      "kind": "audio",
+      "bytes": 6948,
+      "sha256": "4c52108d23a045bff6ac66d63a5f1b75ce3be95cc8b14c8e1e58b763c80e198f",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing19.mp3",
+      "kind": "audio",
+      "bytes": 6217,
+      "sha256": "cf2c264622b99c404a7777b0cfde096cd74ccfcbcba9cd714f10ef3c70a25bd4",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing2.mp3",
+      "kind": "audio",
+      "bytes": 12434,
+      "sha256": "3cfa34050ad0b6359163a3e9d0ac1974fc651bfa38f0c7d6bd69764a0d8d695b",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing20.mp3",
+      "kind": "audio",
+      "bytes": 6583,
+      "sha256": "fd65b3d8b696640a511f66ae5ad142bd83bc19fb49eaab886525adbcf3e33ad9",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing21.mp3",
+      "kind": "audio",
+      "bytes": 9143,
+      "sha256": "0af4c55507b74a1651e3ecf856458ab399e495b581b74a8c482bce49f2249c1f",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing3.mp3",
+      "kind": "audio",
+      "bytes": 8777,
+      "sha256": "aadd23595e4e07d5f8b6a8b5efe037a53f415ca63689d9ec5475236c98eb29ff",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing4.mp3",
+      "kind": "audio",
+      "bytes": 6217,
+      "sha256": "9c5fc853668c485c8c09afa1835848b143388140897418eef91410a59f30a37f",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing5.mp3",
+      "kind": "audio",
+      "bytes": 6948,
+      "sha256": "1bb0c1c1b6f520b3feb30f0a182aa66dbabcc3702eb6c72abca27c82cb2ceb66",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing6.mp3",
+      "kind": "audio",
+      "bytes": 6948,
+      "sha256": "9ed349593466d26ed959527c443afd49c0523ba691effedba5b68ec8508a6248",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing7.mp3",
+      "kind": "audio",
+      "bytes": 6583,
+      "sha256": "126e8dc60bd0a6009d4c6a3b1ff427895875f62985106383275cb45036080341",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing8.mp3",
+      "kind": "audio",
+      "bytes": 7314,
+      "sha256": "52a58c415b27cbeff16cff4a6fa66975422bfe351116d07aecc924c973e28b08",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "swing9.mp3",
+      "kind": "audio",
+      "bytes": 7680,
+      "sha256": "2171d4b7233872c99056e048b09c170e7909fcda72b78a88ee456f229d53a141",
+      "rendered": false,
+      "reason": "audio payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "trooper-Image_0.webp",
+      "kind": "image",
+      "bytes": 97166,
+      "sha256": "5a95ca36eef4f121712b5f4f5ba2f6fd475c51152f840c2a6f7978db076b18f4",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "trooper-Image_1.webp",
+      "kind": "image",
+      "bytes": 49188,
+      "sha256": "e9446ca5dc2fecf68818b559536c245658dcc471d16906248d2a33a2cc5fc90d",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "trooper-Image_2.webp",
+      "kind": "image",
+      "bytes": 35204,
+      "sha256": "e48eaaba79f00c95db6dee82149213f425a8265e91c1382b83c38462baf13798",
+      "rendered": false,
+      "reason": "image payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "trooper-geometry.json",
+      "kind": "data",
+      "bytes": 1135114,
+      "sha256": "2e8eb75841c1b8cea4d18945b2f2ddb4017b601a491ff613d288835be9083389",
+      "rendered": false,
+      "reason": "data payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    },
+    {
+      "capture": "trooper-model.json",
+      "kind": "data",
+      "bytes": 136235,
+      "sha256": "2c3f78dd7a11f2a6f808772bc8c71ec83e05ab1473d57e8666ac1e2de6270db8",
+      "rendered": false,
+      "reason": "data payload — binary/data capture stays byte-exact under .upstream/manifest.json; recorded here hashed, no pretty pass"
+    }
+  ]
+}
