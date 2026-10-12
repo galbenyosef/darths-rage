@@ -1,0 +1,1247 @@
+{
+  "session": "rage",
+  "captured_at": "2026-10-12T23:45:29.296Z",
+  "count": 84,
+  "filtered_out": 0,
+  "entries": [
+    {
+      "key": "GET 127.0.0.1:8127/",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.498Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/?r=2",
+      "ct": "text/html",
+      "size": 182936,
+      "shape": {
+        "$": "string(len=182936)"
+      }
+    },
+    {
+      "key": "GET fonts.googleapis.com/css2",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.535Z",
+      "status": 200,
+      "url": "https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;900&family=Share+Tech+Mono&display=swap",
+      "ct": "text/css",
+      "size": 3158,
+      "shape": {
+        "$": "string(len=3158)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/logo.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.535Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/logo.webp",
+      "ct": "image/webp",
+      "size": 228312,
+      "shape": {
+        "$": "string(len=228319)"
+      }
+    },
+    {
+      "key": "GET cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.535Z",
+      "status": 200,
+      "url": "https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js",
+      "ct": "application/javascript",
+      "size": 607784,
+      "shape": {
+        "$": "string(len=607784)"
+      }
+    },
+    {
+      "key": "GET cdn.jsdelivr.net/npm/three@0.147.0/examples/js/shaders/CopyShader.js",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.535Z",
+      "status": 200,
+      "url": "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/shaders/CopyShader.js",
+      "ct": "application/javascript",
+      "size": 597,
+      "shape": {
+        "$": "string(len=597)"
+      }
+    },
+    {
+      "key": "GET cdn.jsdelivr.net/npm/three@0.147.0/examples/js/shaders/LuminosityHighPassShader.js",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.535Z",
+      "status": 200,
+      "url": "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/shaders/LuminosityHighPassShader.js",
+      "ct": "application/javascript",
+      "size": 1218,
+      "shape": {
+        "$": "string(len=1218)"
+      }
+    },
+    {
+      "key": "GET cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/EffectComposer.js",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.535Z",
+      "status": 200,
+      "url": "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/EffectComposer.js",
+      "ct": "application/javascript",
+      "size": 6241,
+      "shape": {
+        "$": "string(len=6241)"
+      }
+    },
+    {
+      "key": "GET cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/RenderPass.js",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.536Z",
+      "status": 200,
+      "url": "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/RenderPass.js",
+      "ct": "application/javascript",
+      "size": 1741,
+      "shape": {
+        "$": "string(len=1741)"
+      }
+    },
+    {
+      "key": "GET cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/ShaderPass.js",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.536Z",
+      "status": 200,
+      "url": "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/ShaderPass.js",
+      "ct": "application/javascript",
+      "size": 1485,
+      "shape": {
+        "$": "string(len=1485)"
+      }
+    },
+    {
+      "key": "GET cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/UnrealBloomPass.js",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.536Z",
+      "status": 200,
+      "url": "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/UnrealBloomPass.js",
+      "ct": "application/javascript",
+      "size": 12675,
+      "shape": {
+        "$": "string(len=12675)"
+      }
+    },
+    {
+      "key": "GET cdn.jsdelivr.net/npm/three@0.147.0/examples/js/loaders/GLTFLoader.js",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.536Z",
+      "status": 200,
+      "url": "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/loaders/GLTFLoader.js",
+      "ct": "application/javascript",
+      "size": 103311,
+      "shape": {
+        "$": "string(len=103311)"
+      }
+    },
+    {
+      "key": "GET cdn.jsdelivr.net/npm/three@0.147.0/examples/js/utils/SkeletonUtils.js",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.536Z",
+      "status": 200,
+      "url": "https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/utils/SkeletonUtils.js",
+      "ct": "application/javascript",
+      "size": 12030,
+      "shape": {
+        "$": "string(len=12030)"
+      }
+    },
+    {
+      "key": "GET fonts.gstatic.com/s/sharetechmono/v16/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.570Z",
+      "status": 200,
+      "url": "https://fonts.gstatic.com/s/sharetechmono/v16/J7aHnp1uDWRBEqV98dVQztYldFcLowEF.woff2",
+      "ct": "font/woff2",
+      "size": 18000,
+      "shape": {
+        "$": "string(len=18007)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/sevrane-model.json",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.937Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/sevrane-model.json",
+      "ct": "application/json",
+      "size": 102276,
+      "shape": {
+        "$": "object",
+        "$.asset": "object",
+        "$.asset.generator": "string",
+        "$.asset.version": "string",
+        "$.accessors": "array(403)",
+        "$.accessors[0]": "object",
+        "$.accessors[0].type": "string",
+        "$.accessors[0].componentType": "number",
+        "$.accessors[0].count": "number",
+        "$.accessors[0].bufferView": "number",
+        "$.accessors[0].byteOffset": "number",
+        "$.bufferViews": "array(4)",
+        "$.bufferViews[0]": "object",
+        "$.bufferViews[0].buffer": "number",
+        "$.bufferViews[0].byteOffset": "number",
+        "$.bufferViews[0].byteLength": "number",
+        "$.samplers": "array(1)",
+        "$.samplers[0]": "object",
+        "$.samplers[0].magFilter": "number",
+        "$.samplers[0].minFilter": "number",
+        "$.samplers[0].wrapS": "number",
+        "$.samplers[0].wrapT": "number",
+        "$.textures": "array(3)",
+        "$.textures[0]": "object",
+        "$.textures[0].sampler": "number",
+        "$.textures[0].extensions": "object",
+        "$.textures[0].extensions.EXT_texture_webp": "object",
+        "$.textures[0].extensions.EXT_texture_webp.source": "number",
+        "$.images": "array(3)",
+        "$.images[0]": "object",
+        "$.images[0].name": "string",
+        "$.images[0].mimeType": "string",
+        "$.images[0].uri": "string",
+        "$.buffers": "array(1)",
+        "$.buffers[0]": "object",
+        "$.buffers[0].byteLength": "number",
+        "$.materials": "array(1)",
+        "$.materials[0]": "object",
+        "$.materials[0].name": "string",
+        "$.materials[0].doubleSided": "boolean",
+        "$.materials[0].pbrMetallicRoughness": "object",
+        "$.materials[0].pbrMetallicRoughness.baseColorTexture": "object",
+        "$.materials[0].pbrMetallicRoughness.baseColorTexture.index": "number",
+        "$.materials[0].pbrMetallicRoughness.metallicRoughnessTexture": "object",
+        "$.materials[0].pbrMetallicRoughness.metallicRoughnessTexture.index": "number",
+        "$.materials[0].normalTexture": "object",
+        "$.materials[0].normalTexture.index": "number",
+        "$.meshes": "array(1)",
+        "$.meshes[0]": "object",
+        "$.meshes[0].name": "string",
+        "$.meshes[0].primitives": "array(1)",
+        "$.meshes[0].primitives[0]": "object",
+        "$.meshes[0].primitives[0].attributes": "object",
+        "$.meshes[0].primitives[0].attributes.POSITION": "number",
+        "$.meshes[0].primitives[0].attributes.NORMAL": "number",
+        "$.meshes[0].primitives[0].attributes.TEXCOORD_0": "number",
+        "(truncated)": "reached 2048B budget"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/sevrane-geometry.json",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.937Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/sevrane-geometry.json",
+      "ct": "application/json",
+      "size": 3833126,
+      "shape": {
+        "$": "object",
+        "$.b64": "string(len=3833116)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/trooper-model.json",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.937Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/trooper-model.json",
+      "ct": "application/json",
+      "size": 136235,
+      "shape": {
+        "$": "object",
+        "$.asset": "object",
+        "$.asset.generator": "string",
+        "$.asset.version": "string",
+        "$.accessors": "array(549)",
+        "$.accessors[0]": "object",
+        "$.accessors[0].type": "string",
+        "$.accessors[0].componentType": "number",
+        "$.accessors[0].count": "number",
+        "$.accessors[0].bufferView": "number",
+        "$.accessors[0].byteOffset": "number",
+        "$.bufferViews": "array(4)",
+        "$.bufferViews[0]": "object",
+        "$.bufferViews[0].buffer": "number",
+        "$.bufferViews[0].byteOffset": "number",
+        "$.bufferViews[0].byteLength": "number",
+        "$.samplers": "array(1)",
+        "$.samplers[0]": "object",
+        "$.samplers[0].magFilter": "number",
+        "$.samplers[0].minFilter": "number",
+        "$.samplers[0].wrapS": "number",
+        "$.samplers[0].wrapT": "number",
+        "$.textures": "array(3)",
+        "$.textures[0]": "object",
+        "$.textures[0].sampler": "number",
+        "$.textures[0].extensions": "object",
+        "$.textures[0].extensions.EXT_texture_webp": "object",
+        "$.textures[0].extensions.EXT_texture_webp.source": "number",
+        "$.images": "array(3)",
+        "$.images[0]": "object",
+        "$.images[0].name": "string",
+        "$.images[0].mimeType": "string",
+        "$.images[0].uri": "string",
+        "$.buffers": "array(1)",
+        "$.buffers[0]": "object",
+        "$.buffers[0].byteLength": "number",
+        "$.materials": "array(1)",
+        "$.materials[0]": "object",
+        "$.materials[0].name": "string",
+        "$.materials[0].doubleSided": "boolean",
+        "$.materials[0].pbrMetallicRoughness": "object",
+        "$.materials[0].pbrMetallicRoughness.baseColorTexture": "object",
+        "$.materials[0].pbrMetallicRoughness.baseColorTexture.index": "number",
+        "$.materials[0].pbrMetallicRoughness.metallicRoughnessTexture": "object",
+        "$.materials[0].pbrMetallicRoughness.metallicRoughnessTexture.index": "number",
+        "$.materials[0].normalTexture": "object",
+        "$.materials[0].normalTexture.index": "number",
+        "$.meshes": "array(1)",
+        "$.meshes[0]": "object",
+        "$.meshes[0].name": "string",
+        "$.meshes[0].primitives": "array(1)",
+        "$.meshes[0].primitives[0]": "object",
+        "$.meshes[0].primitives[0].attributes": "object",
+        "$.meshes[0].primitives[0].attributes.POSITION": "number",
+        "$.meshes[0].primitives[0].attributes.NORMAL": "number",
+        "$.meshes[0].primitives[0].attributes.TEXCOORD_0": "number",
+        "(truncated)": "reached 2048B budget"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/trooper-geometry.json",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.937Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/trooper-geometry.json",
+      "ct": "application/json",
+      "size": 1135114,
+      "shape": {
+        "$": "object",
+        "$.b64": "string(len=1135104)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/courier-model.json",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.937Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/courier-model.json",
+      "ct": "application/json",
+      "size": 6350,
+      "shape": {
+        "$": "object",
+        "$.asset": "object",
+        "$.asset.generator": "string",
+        "$.asset.version": "string",
+        "$.accessors": "array(21)",
+        "$.accessors[0]": "object",
+        "$.accessors[0].type": "string",
+        "$.accessors[0].componentType": "number",
+        "$.accessors[0].count": "number",
+        "$.accessors[0].max": "array(3)",
+        "$.accessors[0].max[0]": "number",
+        "$.accessors[0].min": "array(3)",
+        "$.accessors[0].min[0]": "number",
+        "$.accessors[0].bufferView": "number",
+        "$.accessors[0].byteOffset": "number",
+        "$.bufferViews": "array(7)",
+        "$.bufferViews[0]": "object",
+        "$.bufferViews[0].buffer": "number",
+        "$.bufferViews[0].byteOffset": "number",
+        "$.bufferViews[0].byteLength": "number",
+        "$.bufferViews[0].byteStride": "number",
+        "$.bufferViews[0].target": "number",
+        "$.samplers": "array(1)",
+        "$.samplers[0]": "object",
+        "$.samplers[0].wrapS": "number",
+        "$.samplers[0].wrapT": "number",
+        "$.textures": "array(7)",
+        "$.textures[0]": "object",
+        "$.textures[0].sampler": "number",
+        "$.textures[0].extensions": "object",
+        "$.textures[0].extensions.EXT_texture_webp": "object",
+        "$.textures[0].extensions.EXT_texture_webp.source": "number",
+        "$.images": "array(7)",
+        "$.images[0]": "object",
+        "$.images[0].mimeType": "string",
+        "$.images[0].uri": "string",
+        "$.buffers": "array(1)",
+        "$.buffers[0]": "object",
+        "$.buffers[0].byteLength": "number",
+        "$.materials": "array(7)",
+        "$.materials[0]": "object",
+        "$.materials[0].name": "string",
+        "$.materials[0].doubleSided": "boolean",
+        "$.materials[0].pbrMetallicRoughness": "object",
+        "$.materials[0].pbrMetallicRoughness.roughnessFactor": "number",
+        "$.materials[0].pbrMetallicRoughness.metallicFactor": "number",
+        "$.materials[0].pbrMetallicRoughness.baseColorTexture": "object",
+        "$.materials[0].pbrMetallicRoughness.baseColorTexture.index": "number",
+        "$.meshes": "array(7)",
+        "$.meshes[0]": "object",
+        "$.meshes[0].name": "string",
+        "$.meshes[0].primitives": "array(1)",
+        "$.meshes[0].primitives[0]": "object",
+        "$.meshes[0].primitives[0].attributes": "object",
+        "$.meshes[0].primitives[0].attributes.POSITION": "number",
+        "$.meshes[0].primitives[0].attributes.TEXCOORD_0": "number",
+        "$.meshes[0].primitives[0].attributes.NORMAL": "number",
+        "(truncated)": "reached 2048B budget"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/courier-geometry.json",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.937Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/courier-geometry.json",
+      "ct": "application/json",
+      "size": 1895946,
+      "shape": {
+        "$": "object",
+        "$.b64": "string(len=1895936)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-model.json",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.937Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-model.json",
+      "ct": "application/json",
+      "size": 7140,
+      "shape": {
+        "$": "object",
+        "$.asset": "object",
+        "$.asset.generator": "string",
+        "$.asset.version": "string",
+        "$.accessors": "array(24)",
+        "$.accessors[0]": "object",
+        "$.accessors[0].type": "string",
+        "$.accessors[0].componentType": "number",
+        "$.accessors[0].count": "number",
+        "$.accessors[0].max": "array(3)",
+        "$.accessors[0].max[0]": "number",
+        "$.accessors[0].min": "array(3)",
+        "$.accessors[0].min[0]": "number",
+        "$.accessors[0].bufferView": "number",
+        "$.accessors[0].byteOffset": "number",
+        "$.bufferViews": "array(8)",
+        "$.bufferViews[0]": "object",
+        "$.bufferViews[0].buffer": "number",
+        "$.bufferViews[0].byteOffset": "number",
+        "$.bufferViews[0].byteLength": "number",
+        "$.bufferViews[0].byteStride": "number",
+        "$.bufferViews[0].target": "number",
+        "$.samplers": "array(1)",
+        "$.samplers[0]": "object",
+        "$.samplers[0].wrapS": "number",
+        "$.samplers[0].wrapT": "number",
+        "$.textures": "array(8)",
+        "$.textures[0]": "object",
+        "$.textures[0].sampler": "number",
+        "$.textures[0].extensions": "object",
+        "$.textures[0].extensions.EXT_texture_webp": "object",
+        "$.textures[0].extensions.EXT_texture_webp.source": "number",
+        "$.images": "array(8)",
+        "$.images[0]": "object",
+        "$.images[0].mimeType": "string",
+        "$.images[0].uri": "string",
+        "$.buffers": "array(1)",
+        "$.buffers[0]": "object",
+        "$.buffers[0].byteLength": "number",
+        "$.materials": "array(8)",
+        "$.materials[0]": "object",
+        "$.materials[0].name": "string",
+        "$.materials[0].doubleSided": "boolean",
+        "$.materials[0].pbrMetallicRoughness": "object",
+        "$.materials[0].pbrMetallicRoughness.roughnessFactor": "number",
+        "$.materials[0].pbrMetallicRoughness.metallicFactor": "number",
+        "$.materials[0].pbrMetallicRoughness.baseColorTexture": "object",
+        "$.materials[0].pbrMetallicRoughness.baseColorTexture.index": "number",
+        "$.meshes": "array(8)",
+        "$.meshes[0]": "object",
+        "$.meshes[0].name": "string",
+        "$.meshes[0].primitives": "array(1)",
+        "$.meshes[0].primitives[0]": "object",
+        "$.meshes[0].primitives[0].attributes": "object",
+        "$.meshes[0].primitives[0].attributes.POSITION": "number",
+        "$.meshes[0].primitives[0].attributes.TEXCOORD_0": "number",
+        "$.meshes[0].primitives[0].attributes.NORMAL": "number",
+        "(truncated)": "reached 2048B budget"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-geometry.json",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:15.937Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-geometry.json",
+      "ct": "application/json",
+      "size": 1486346,
+      "shape": {
+        "$": "object",
+        "$.b64": "string(len=1486336)"
+      }
+    },
+    {
+      "key": "GET image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.132Z",
+      "status": 200,
+      "url": "data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
+      "ct": "image/webp",
+      "size": 56,
+      "shape": {
+        "$": "string"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/sevrane-Image_0.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.219Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/sevrane-Image_0.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/sevrane-Image_1.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.219Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/sevrane-Image_1.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/sevrane-Image_2.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.220Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/sevrane-Image_2.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/trooper-Image_0.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.259Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/trooper-Image_0.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/trooper-Image_1.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.259Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/trooper-Image_1.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/trooper-Image_2.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.259Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/trooper-Image_2.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-tex.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.313Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-tex.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-tex_.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.313Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-tex_.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-tex__.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.313Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-tex__.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-tex___.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.313Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-tex___.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-tex____.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.313Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-tex____.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-tex_____.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.313Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-tex_____.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-tex______.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.313Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-tex______.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/crate-tex_______.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.313Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/crate-tex_______.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/courier-tex.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.336Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/courier-tex.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/courier-tex_.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.336Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/courier-tex_.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/courier-tex__.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.336Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/courier-tex__.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/courier-tex___.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.336Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/courier-tex___.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/courier-tex____.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.336Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/courier-tex____.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/courier-tex_____.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.336Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/courier-tex_____.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/courier-tex______.webp",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:16.336Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/courier-tex______.webp",
+      "ct": "image/webp",
+      "size": 0,
+      "shape": {
+        "$": "null"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/breathing.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.908Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/breathing.mp3",
+      "ct": "audio/mpeg",
+      "size": 228268,
+      "shape": {
+        "$": "string(len=228275)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/music.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.908Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/music.mp3",
+      "ct": "audio/mpeg",
+      "size": 1503260,
+      "shape": {
+        "$": "string(len=1503267)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/ignition.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.909Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/ignition.mp3",
+      "ct": "audio/mpeg",
+      "size": 58572,
+      "shape": {
+        "$": "string(len=58579)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/stress.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.909Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/stress.mp3",
+      "ct": "audio/mpeg",
+      "size": 132632,
+      "shape": {
+        "$": "string(len=132639)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/spin.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.909Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/spin.mp3",
+      "ct": "audio/mpeg",
+      "size": 60604,
+      "shape": {
+        "$": "string(len=60611)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect0.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.909Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect0.mp3",
+      "ct": "audio/mpeg",
+      "size": 17556,
+      "shape": {
+        "$": "string(len=17563)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect1.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.909Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect1.mp3",
+      "ct": "audio/mpeg",
+      "size": 17068,
+      "shape": {
+        "$": "string(len=17075)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect2.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.909Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect2.mp3",
+      "ct": "audio/mpeg",
+      "size": 21456,
+      "shape": {
+        "$": "string(len=21463)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect3.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.909Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect3.mp3",
+      "ct": "audio/mpeg",
+      "size": 14628,
+      "shape": {
+        "$": "string(len=14635)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect4.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.909Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect4.mp3",
+      "ct": "audio/mpeg",
+      "size": 18532,
+      "shape": {
+        "$": "string(len=18539)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect5.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.910Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect5.mp3",
+      "ct": "audio/mpeg",
+      "size": 19020,
+      "shape": {
+        "$": "string(len=19027)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect6.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.910Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect6.mp3",
+      "ct": "audio/mpeg",
+      "size": 9752,
+      "shape": {
+        "$": "string(len=9759)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect7.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.910Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect7.mp3",
+      "ct": "audio/mpeg",
+      "size": 18532,
+      "shape": {
+        "$": "string(len=18539)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect8.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.910Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect8.mp3",
+      "ct": "audio/mpeg",
+      "size": 12680,
+      "shape": {
+        "$": "string(len=12687)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/deflect9.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.910Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/deflect9.mp3",
+      "ct": "audio/mpeg",
+      "size": 15116,
+      "shape": {
+        "$": "string(len=15123)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/blaster.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.910Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/blaster.mp3",
+      "ct": "audio/mpeg",
+      "size": 21792,
+      "shape": {
+        "$": "string(len=21799)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing0.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.910Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing0.mp3",
+      "ct": "audio/mpeg",
+      "size": 12192,
+      "shape": {
+        "$": "string(len=12199)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing1.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.910Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing1.mp3",
+      "ct": "audio/mpeg",
+      "size": 12192,
+      "shape": {
+        "$": "string(len=12199)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing2.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.910Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing2.mp3",
+      "ct": "audio/mpeg",
+      "size": 16580,
+      "shape": {
+        "$": "string(len=16587)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing3.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing3.mp3",
+      "ct": "audio/mpeg",
+      "size": 11704,
+      "shape": {
+        "$": "string(len=11711)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing4.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing4.mp3",
+      "ct": "audio/mpeg",
+      "size": 8292,
+      "shape": {
+        "$": "string(len=8299)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing5.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing5.mp3",
+      "ct": "audio/mpeg",
+      "size": 9264,
+      "shape": {
+        "$": "string(len=9271)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing6.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing6.mp3",
+      "ct": "audio/mpeg",
+      "size": 9264,
+      "shape": {
+        "$": "string(len=9271)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing7.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing7.mp3",
+      "ct": "audio/mpeg",
+      "size": 8780,
+      "shape": {
+        "$": "string(len=8787)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing8.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing8.mp3",
+      "ct": "audio/mpeg",
+      "size": 9752,
+      "shape": {
+        "$": "string(len=9759)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing9.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing9.mp3",
+      "ct": "audio/mpeg",
+      "size": 10240,
+      "shape": {
+        "$": "string(len=10247)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing10.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing10.mp3",
+      "ct": "audio/mpeg",
+      "size": 8292,
+      "shape": {
+        "$": "string(len=8299)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing11.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing11.mp3",
+      "ct": "audio/mpeg",
+      "size": 10240,
+      "shape": {
+        "$": "string(len=10247)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing12.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.911Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing12.mp3",
+      "ct": "audio/mpeg",
+      "size": 8292,
+      "shape": {
+        "$": "string(len=8299)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing13.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing13.mp3",
+      "ct": "audio/mpeg",
+      "size": 9264,
+      "shape": {
+        "$": "string(len=9271)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing14.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing14.mp3",
+      "ct": "audio/mpeg",
+      "size": 8780,
+      "shape": {
+        "$": "string(len=8787)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing15.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing15.mp3",
+      "ct": "audio/mpeg",
+      "size": 9264,
+      "shape": {
+        "$": "string(len=9271)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing16.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing16.mp3",
+      "ct": "audio/mpeg",
+      "size": 10240,
+      "shape": {
+        "$": "string(len=10247)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing17.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing17.mp3",
+      "ct": "audio/mpeg",
+      "size": 8292,
+      "shape": {
+        "$": "string(len=8299)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing18.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing18.mp3",
+      "ct": "audio/mpeg",
+      "size": 9264,
+      "shape": {
+        "$": "string(len=9271)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing19.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing19.mp3",
+      "ct": "audio/mpeg",
+      "size": 8292,
+      "shape": {
+        "$": "string(len=8299)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing20.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing20.mp3",
+      "ct": "audio/mpeg",
+      "size": 8780,
+      "shape": {
+        "$": "string(len=8787)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/swing21.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/swing21.mp3",
+      "ct": "audio/mpeg",
+      "size": 12192,
+      "shape": {
+        "$": "string(len=12199)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/hum_start.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/hum_start.mp3",
+      "ct": "audio/mpeg",
+      "size": 20052,
+      "shape": {
+        "$": "string(len=20059)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/hum_loop.mp3",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:37.912Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/hum_loop.mp3",
+      "ct": "audio/mpeg",
+      "size": 1071848,
+      "shape": {
+        "$": "string(len=1071855)"
+      }
+    },
+    {
+      "key": "GET 127.0.0.1:8127/favicon.ico",
+      "method": "GET",
+      "timestamp": "2026-10-12T23:43:38.150Z",
+      "status": 200,
+      "url": "http://127.0.0.1:8127/favicon.ico",
+      "ct": "image/x-icon",
+      "size": 20116,
+      "shape": {
+        "$": "string(len=20123)"
+      }
+    }
+  ],
+  "detail_hint": "Run \"browser network --detail <key>\" for full body."
+}
