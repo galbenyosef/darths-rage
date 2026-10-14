@@ -16,23 +16,32 @@
 //                        .gitignore and can silently echo its input — single
 //                        pass, verified idempotent; the pretty is provably NOT
 //                        a byte copy of the minified block)
-//   index.html inline <style>s -> readable/index-inline-2.pretty.css,
-//                        readable/index-inline-3.pretty.css (stylesheet rule:
-//                        stylesheets are indexed whole, never sliced)
+//   index.html inline <style>s -> readable/index-inline-1|2.pretty.css
+//                        (stylesheet rule: stylesheets are indexed whole,
+//                        never sliced)
 //   every twin is recorded in readable/index-inline-map.json with the exact
 //   byte range + sha256 of its capture block.
 //
-//   src/ slicing: the inline script is a SINGLE top-level IIFE
-//   (`(() => { … })();`), so statement-aligned slices are cut at the IIFE
-//   body's top-level statement boundaries (~250-350 line windows; oversized
-//   single declarations stay whole). The IIFE wrapper head (`(() => {`) and
-//   tail (`})();`) and any body statement that is not standalone at module
-//   top level (the engine guard contains a top-level `return`) are indexed as
-//   skipped sections, never sliced. Every slice gets the exact 2-line
-//   provenance header, is parse-checked with `node --input-type=module
-//   --check -` and round-trips byte-exact to its readable line range.
+//   src/ slicing — section-aligned (2026-10-14 structure pass): the inline
+//   script is a SINGLE classic IIFE (`(() => { … })();`) with no ES modules
+//   (0 import/export occurrences) and no captured source maps (0
+//   sourceMappingURL across all 72 files — evidence: tools/probe-structure.mjs),
+//   so the real structure the bytes expose is the author's own: 21 top-level
+//   section banners (`/* ===== level ===== */`, two-space indent). Slices are
+//   cut at those section boundaries; a section longer than the 350-line window
+//   cap splits further at statement boundaries into -a/-b/... parts, and the
+//   slice files are NAMED after the sections (src/level-a.js, src/updates-c.js,
+//   … — the desimayhem semantic-slice precedent). The IIFE wrapper head/tail
+//   and body statements that are not standalone at module top level (the
+//   engine guard, the renderer try guard and the sfx declaration each contain
+//   a top-level `return`) are indexed as skipped sections, never sliced. Every
+//   slice gets the exact 2-line provenance header, is parse-checked with
+//   `node --input-type=module --check -` and round-trips byte-exact to its
+//   readable line range — through the recorded rename map when rename-map.json
+//   carries a record for it (tools/engine/rename-layer.mjs, the same
+//   application tools/verify-rename.mjs and tools/audit.js gate on).
 //
-// Non-code payloads (40 MP3s, 18 WebP images, favicon.ico, the twelve glTF
+// Non-code payloads (40 MP3s, 22 WebP images, favicon.ico, the eight glTF
 // model/geometry JSON payloads) are recorded as hashed notRendered entries —
 // bytes + sha256, no pretty pass — and stay byte-exact under the manifest.
 // The CDN dependencies (nine jsdelivr three.js r147 scripts, the Google Fonts
@@ -40,14 +49,17 @@
 // no derived layer either; tools/capture.mjs --check keeps them listed as
 // external off-origin references.
 //
-// Identifiers in src/ are the bundle's own minified names — the rename
-// campaign (PLAN §5) is recorded as an open task in README.md. usage:
+// The semantic rename layer is recorded in rename-map.json (recovered from the
+// committed slices by tools/recover-scoped-map.mjs, authored via
+// tools/apply-names.mjs + tools/names.json) and re-applied here on every
+// re-cut. usage:
 //   node tools/derive.mjs
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { applyRecordedMap, markerText, markerWords, sliceHeader } from "./engine/rename-layer.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const proj = path.resolve(here, "..");
@@ -103,28 +115,6 @@ function parses(text) {
   });
   return { ok: r.status === 0, why: (r.stderr || "").trim().split("\n").slice(0, 5).join(" | ") };
 }
-
-// ── markers for titles (top tokens, lowercase; fleet convention) ────────
-const STOP = new Set(
-  ("function return typeof undefined object string number boolean prototype length value default " +
-    "exports import this that with from then else case break continue delete instanceof constructor " +
-    "arguments void null true false call apply name type text target window document globalthis self " +
-    "require module async await yield static class const let var new for while switch throw try catch " +
-    "finally extends super using debugger of in do if has own hasown get set")
-    .split(" ")
-    .filter(Boolean),
-);
-function markers(text, n = 2) {
-  const code = text.replace(/`[^`]*`|"[^"\n]*"|'[^'\n]*'/g, " ");
-  const counts = new Map();
-  for (const m of code.matchAll(/[A-Za-z][A-Za-z0-9_]{2,}/g)) {
-    const w = m[0].toLowerCase();
-    if (STOP.has(w)) continue;
-    counts.set(w, (counts.get(w) || 0) + 1);
-  }
-  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, n);
-}
-const markerText = (ms) => ms.map(([w, c]) => `${w}(${c})`).join(", ");
 
 // ── windowize: cut only at statement starts; ≤350 lines, a single ───────
 // ── oversized declaration is a window of its own ────────────────────────
@@ -234,6 +224,54 @@ const KIND_OF = [
   [/\.json$/i, "data"],
 ];
 
+// ── recorded semantic rename map (optional input; see engine header) ────
+function loadRenameMap() {
+  const p = path.join(proj, "rename-map.json");
+  if (!fs.existsSync(p)) return { files: {}, scoped: {}, present: false };
+  const rm = JSON.parse(fs.readFileSync(p, "utf8"));
+  return { files: rm.files || {}, scoped: rm.scoped || {}, present: true };
+}
+const recordsFor = (rm, file) => {
+  const files = rm.files[file];
+  const scoped = rm.scoped[file];
+  if (!files && !scoped) return null;
+  return { files, scoped };
+};
+// The authored binding map (tools/names.json): capture rel -> {old: new} for
+// the chunk's top-level (IIFE-body scope) bindings. Recorded into split-spec
+// per source as `renameBindings` (only the rules that actually fired), so the
+// reconstruction gates can re-apply the same map to the skipped sections.
+function loadNames() {
+  const p = path.join(here, "names.json");
+  if (!fs.existsSync(p)) return {};
+  const all = JSON.parse(fs.readFileSync(p, "utf8"));
+  const out = {};
+  for (const [k, v] of Object.entries(all)) if (!k.startsWith("__")) out[k] = v.renames || v;
+  return out;
+}
+
+// ── the author's section banners (the real structure the bytes expose) ──
+// RAGE's inline script carries 21 top-level block comments in exactly the
+// form `  /* ================= name ================= */` at two-space indent
+// (IIFE body level). They are the only structural boundary the single classic
+// script declares, so slices are cut at them; the part letters (-a/-b/…)
+// follow the desimayhem precedent for sections larger than the window cap.
+function findBanners(lines) {
+  const banners = [];
+  const re = /^ {2}\/\* =+ (.+?) =+ \*\/$/;
+  for (let i = 0; i < lines.length; i++) {
+    const m = re.exec(lines[i]);
+    if (m) banners.push({ line: i + 1, name: m[1].trim() });
+  }
+  return banners;
+}
+const sectionSlug = (name) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+const partLetter = (i) => String.fromCharCode(97 + i);
+
 async function main() {
   const { mod: prettier, at } = await loadPrettier();
   console.log(`pinned prettier ${PINNED} (${at})`);
@@ -255,14 +293,21 @@ async function main() {
   fs.mkdirSync(srcDir, { recursive: true });
   const written = { readable: new Set(), src: new Set() };
 
+  const renameMap = loadRenameMap();
+  const names = { byCapture: loadNames() };
+  let renamedSlices = 0;
+  let renamedNames = 0;
+
   const sources = [];
   const sections = [];
   const notRendered = [];
   const inlineMapBlocks = [];
   const inlineFiles = [];
   let slicedTotal = 0;
+  let skippedTotal = 0;
+  let wholeFileTotal = 0;
 
-  // ── statement-aligned slicing of one script source (pretty text) ───────
+  // ── section-aligned slicing of one script source (pretty text) ─────────
   async function sliceScript({ rel, captureKind, captureByteStart, captureByteEnd, captureSha256, captureBytesLen, tag, pretty, sourceFile }) {
     const lines = linesOf(pretty);
     const dbg = await prettier.__debug.parse(pretty, { parser: "babel" });
@@ -310,8 +355,39 @@ async function main() {
       if (stmts[i].startLine <= stmts[i - 1].endLine)
         throw new Error(`${rel}: statements ${i - 1}/${i} share a line — cannot slice at line boundaries`);
 
+    // ── section assignment: a statement belongs to the last banner above it ─
+    const banners = findBanners(lines);
+    const secs = [];
+    let curSec = { name: "boot", title: "entry helper", slug: "boot", line: stmts.length ? stmts[0].startLine : 1, banner: false, stmts: [] };
+    let bi = 0;
+    for (const s of stmts) {
+      while (bi < banners.length && banners[bi].line < s.startLine) {
+        if (curSec.stmts.length || curSec.banner) secs.push(curSec);
+        curSec = { name: banners[bi].name, slug: sectionSlug(banners[bi].name), line: banners[bi].line, banner: true, stmts: [] };
+        bi++;
+      }
+      curSec.stmts.push(s);
+    }
+    if (curSec.stmts.length) secs.push(curSec);
+    for (const sec of secs)
+      if (!sec.stmts.length) throw new Error(`${rel}: section "${sec.name}" has no statements — banner scan changed shape`);
+    const noBanner = banners.length === 0;
+    if (noBanner && secs.length !== 1) throw new Error(`${rel}: no banners but ${secs.length} sections`);
+    for (const sec of secs) {
+      if (sec.banner && lines[sec.line - 1] === undefined) throw new Error(`${rel}: banner of "${sec.name}" is out of range`);
+      if (sec.banner && sec.stmts[0].startLine - sec.line > 2)
+        throw new Error(`${rel}: banner "${sec.name}" at line ${sec.line} is ${sec.stmts[0].startLine - sec.line} lines from its first statement — banner scan changed shape`);
+    }
+    if (secs.length > 1) {
+      const dup = new Set();
+      for (const sec of secs)
+        if (dup.has(sec.slug)) throw new Error(`${rel}: duplicate section slug "${sec.slug}" — cannot name slices`);
+        else dup.add(sec.slug);
+    }
+
     const specials = [];
     const covered = new Array(stmts.length).fill(false);
+    const indexOfStmt = new Map(stmts.map((s, i) => [s, i]));
     const claim = (a, b, block) => {
       if (a < 0 || b < a || b >= stmts.length) throw new Error(`${rel}: bad ${block.file} range ${a}-${b}`);
       for (let i = a; i <= b; i++) {
@@ -342,7 +418,8 @@ async function main() {
           desc: `Lines ${last.endLine + 1}-${lines.length}. The IIFE invocation tail (\`})();\`) is not standalone, so it is indexed only.`,
           A: last.endLine + 1,
           B: lines.length,
-        });    }
+        });
+    }
 
     // body statements that are not standalone at module top level (top-level `return`)
     for (let i = 0; i < stmts.length; i++) {
@@ -356,22 +433,38 @@ async function main() {
       }
     }
 
-    // runs of uncovered statements -> windows
-    const runs = [];
-    for (let i = 0; i < stmts.length; i++) {
-      if (covered[i]) continue;
-      const run = [stmts[i]];
-      while (i + 1 < stmts.length && !covered[i + 1]) run.push(stmts[++i]);
-      runs.push(run);
+    // ── per section: runs of uncovered statements -> windows ───────────────
+    const blocks = [...specials];
+    const sectionOf = new Map();
+    for (const sec of secs) {
+      const list = sec.stmts.filter((s) => !covered[indexOfStmt.get(s)]);
+      const runs = [];
+      for (let i = 0; i < sec.stmts.length; i++) {
+        if (covered[indexOfStmt.get(sec.stmts[i])]) continue;
+        const run = [sec.stmts[i]];
+        while (i + 1 < sec.stmts.length && !covered[indexOfStmt.get(sec.stmts[i + 1])]) run.push(sec.stmts[++i]);
+        runs.push(run);
+      }
+      const windows = [];
+      for (const run of runs) for (const w of windowize(run)) windows.push(w);
+      if (!windows.length) throw new Error(`${rel}: section "${sec.name}" produced no slice windows`);
+      windows.forEach((w, k) => {
+        // the section's first window owns its banner line; later windows start
+        // at their first statement
+        const firstClaimed = covered[indexOfStmt.get(sec.stmts[0])];
+        const A = k === 0 && !firstClaimed ? Math.min(sec.line, w.startLine) : w.startLine;
+        const parts = windows.length;
+        const file = parts === 1 ? `${sec.slug}.js` : `${sec.slug}-${partLetter(k)}.js`;
+        const title = sec.title || sec.name;
+        const titleWithParts = parts === 1 ? title : `${title} (part ${k + 1} of ${parts})`;
+        const block = { kind: "slice", A, B: w.endLine, count: w.count, section: sec.name, file, title: titleWithParts };
+        blocks.push(block);
+        sectionOf.set(file, sec);
+      });
+      if (list.length === 0) throw new Error(`${rel}: section "${sec.name}" is entirely skipped`);
     }
-    const windows = [];
-    for (const run of runs) for (const w of windowize(run)) windows.push(w);
 
-    // blocks in line order, then re-tile so every line of the pretty is owned
-    const blocks = [
-      ...specials,
-      ...windows.map((w) => ({ kind: "slice", A: w.startLine, B: w.endLine, count: w.count })),
-    ];
+    // re-tile so every line of the pretty is owned
     blocks.sort((a, b) => a.A - b.A);
     for (let i = 0; i < blocks.length; i++) {
       if (i === 0) blocks[i].A = 1;
@@ -381,30 +474,41 @@ async function main() {
 
     let nn = 0;
     let perFileSkipped = 0;
+    const targetsByOld = new Map(); // rename map: old name -> Set(targets) seen in this chunk's slices
+    const noteTarget = (old, target) => {
+      if (!targetsByOld.has(old)) targetsByOld.set(old, new Set());
+      targetsByOld.get(old).add(target);
+    };
+    let perFileRenamed = 0;
     for (const b of blocks) {
       if (b.kind === "slice") {
         nn++;
-        const num = String(nn).padStart(2, "0");
-        const body = lines.slice(b.A - 1, b.B).join("\n") + "\n";
-        const ms = markers(body);
-        const topWord = ms.length ? ms[0][0] : /^\s*['"]use strict['"]/.test(body) ? "use-strict" : tag.toLowerCase();
-        const oversized = b.count === 1 && b.B - b.A + 1 > MAX_WINDOW;
-        const file = `${tag}-${num}.js`;
-        const sliceText =
-          `// ${tag} ${num} — ${topWord}\n` +
-          `// Lines ${b.A}-${b.B} of ${sourceFile} (statement-aligned).\n` +
-          body;
+        const file = b.file;
+        const rawBody = lines.slice(b.A - 1, b.B).join("\n") + "\n";
+        const record = recordsFor(renameMap, file);
+        const body = record ? applyRecordedMap(rawBody, record) : rawBody;
+        if (record) {
+          perFileRenamed++;
+          for (const [old, target] of Object.entries(record.files || {})) noteTarget(old, target);
+          for (const [old, hits] of Object.entries(record.scoped || {}))
+            for (const [, target] of hits) noteTarget(old, target);
+        }
+        const base = file.replace(/\.js$/, "");
+        const header = sliceHeader({ base, title: b.title, sourceFile, startLine: b.A, endLine: b.B });
+        const sliceText = header + body;
         const chk = parses(sliceText);
         if (!chk.ok) throw new Error(`generated src/${file} does not parse standalone: ${chk.why}`);
         fs.writeFileSync(path.join(srcDir, file), sliceText);
         written.src.add(file);
+        const ms = markerWords(body);
         sections.push({
           file,
-          title: `${tag} ${num} — ${topWord}`,
-          desc: `${oversized ? "Oversized single declaration (kept whole). " : ""}Lines ${b.A}-${b.B}. Markers: ${markerText(ms)}.`,
+          title: b.title,
+          desc: `Section "${b.section}" of the inline script. Lines ${b.A}-${b.B}. Markers: ${markerText(ms)}.${record ? " Range re-cut through the recorded semantic rename map." : ""}`,
           startLine: b.A,
           endLine: b.B,
           sourceFile,
+          section: b.section,
         });
       } else {
         perFileSkipped++;
@@ -422,6 +526,18 @@ async function main() {
       }
     }
     slicedTotal += nn;
+    skippedTotal += perFileSkipped;
+    // the authored binding map: rules from tools/names.json that actually
+    // fired in this chunk (seen in at least one recorded slice map)
+    const authored = names.byCapture?.[rel] || {};
+    const renameBindings = {};
+    for (const [old, target] of Object.entries(authored)) {
+      if (targetsByOld.get(old)?.has(target)) {
+        renameBindings[old] = target;
+        renamedNames++;
+      }
+    }
+    if (perFileRenamed) renamedSlices += perFileRenamed;
     sources.push({
       sourceFile,
       capture: rel,
@@ -435,14 +551,18 @@ async function main() {
       prettyPasses: 1,
       idempotent: true,
       tag,
-      slicingMode,
+      slicingMode: secs.length > 1 ? `${slicingMode}-section-aligned` : slicingMode,
       slices: nn,
+      skipped: perFileSkipped,
+      sections: secs.map((s) => s.name),
+      renameBindings,
       derived:
-        `readable + ${nn} statement-aligned slice(s)` +
-        (perFileSkipped ? ` + ${perFileSkipped} skipped section(s)` : ""),
+        `readable + ${nn} section-aligned slice(s)` +
+        (perFileSkipped ? ` + ${perFileSkipped} skipped section(s)` : "") +
+        (perFileRenamed ? ` (${perFileRenamed} through the recorded rename map)` : ""),
     });
     console.log(
-      `derive: ${tag} -> ${sourceFile} (${lines.length} lines, ${nn} slices, ${perFileSkipped} skipped, ${slicingMode})`,
+      `derive: ${tag} -> ${sourceFile} (${lines.length} lines, ${nn} slices, ${perFileSkipped} skipped, ${secs.length} section(s), ${slicingMode}${perFileRenamed ? `, ${perFileRenamed} renamed` : ""})`,
     );
   }
 
@@ -499,6 +619,7 @@ async function main() {
       if (b.kind === "style" || isImportmap) {
         // stylesheet/importmap rule: whole-file, never sliced
         const lines = linesOf(pretty);
+        wholeFileTotal++;
         sections.push({
           file: `${tag}.${prettyExt}`,
           wholeFile: true,
@@ -591,10 +712,12 @@ async function main() {
   // ── 5) split-spec.json (2-space indent + trailing newline) ─────────────
   const scriptSource = sources.find((s) => s.slicingMode);
   const cssSources = sources.filter((s) => s.sourceFile.endsWith(".pretty.css"));
+  const slicesRanged = sections.filter((s) => !s.wholeFile && !s.skipped).length;
+  const skippedSections = sections.filter((s) => s.skipped).length;
   const spec = {
     project: "darths-rage",
-    kind: "statement-aligned-slices",
-    defaultFile: `src/${sections.find((s) => !s.wholeFile && !s.skipped).file}`,
+    kind: "section-aligned-slices",
+    defaultFile: "src/boot.js",
     note:
       "RAGE (https://darths-rage.netlify.app/) is capture-class: a single-file three.js action game served by " +
       "Netlify at the origin root. §0.4 fork-over-mirror was checked on 2026-10-13 — no public upstream repo " +
@@ -602,23 +725,30 @@ async function main() {
       "projects), so the mirror stands. Derived pipeline: capture → pinned prettier 3.9.6 (module API, default " +
       "options, single pass verified idempotent — never the CLI: it respects .gitignore and can silently echo " +
       "its input) → the entry document's inline <script> becomes readable/index-inline-1.pretty.js and its two " +
-      "inline <style> blocks become readable/index-inline-2|3.pretty.css (every pretty provably NOT " +
+      "inline <style> blocks become readable/index-inline-1|2.pretty.css (every pretty provably NOT " +
       "byte-identical to its capture block; readable/index-inline-map.json records each block's exact byte " +
-      "range + sha256). The inline script is a SINGLE top-level IIFE (`(() => { … })();`): statement-aligned " +
-      "slices src/index-inline-1-NN.js are cut at the IIFE body's top-level statement boundaries (~250-350 " +
-      "line windows; oversized single declarations stay whole) with an exact 2-line provenance header; the " +
-      "IIFE wrapper head/tail and body statements that are not standalone at module top level (the engine " +
-      "guard contains a top-level `return`) are skipped sections, indexed but never sliced. Every slice parses " +
-      "standalone under `node --input-type=module --check -` and round-trips byte-exact to its recorded " +
-      "readable line range. Stylesheet rule — the two inline <style> blocks are wholeFile sections, never " +
-      "sliced. Non-code payloads (MP3 audio, WebP images, favicon.ico and the twelve glTF model/geometry " +
-      "JSON payloads) are hashed notRendered records (bytes + sha256, no pretty pass). The CDN dependencies " +
-      "(nine jsdelivr three.js r147 scripts, the Google Fonts stylesheet) were never captured (socker " +
-      "precedent, PLAN §1) and have no derived layer; tools/capture.mjs --check lists them as external " +
-      "off-origin references. Identifiers in src/ are the bundle's own minified names — the rename campaign " +
-      "(PLAN §5) is recorded as an open task in README.md, not claimed here. Capture bytes are untouched by " +
-      "everything above; re-cut with `node tools/derive.mjs` after any capture refresh. `node tools/audit.js` " +
-      "is the gate.",
+      "range + sha256). Structure (2026-10-14 pass, evidence tools/probe-structure.mjs): 0 sourceMappingURL " +
+      "occurrences and 0 *.map files across the 72 captured files — no original tree can be reconstructed from " +
+      "maps; the inline script is one classic IIFE with 0 import/export occurrences and no factory family, so " +
+      "the real structure the bytes expose is the author's own 21 top-level section banners " +
+      "(`/* ===== level ===== */`, two-space indent). src/ slices are cut at those section boundaries (35 " +
+      "statement-aligned slice windows: sections longer than the 350-line cap split into -a/-b/... parts) and " +
+      "named after the sections (src/boot.js, src/level-a.js, src/updates-c.js, …). The IIFE wrapper head/tail " +
+      "and body statements that are not standalone at module top level (the engine guard, the renderer try " +
+      "guard and the sfx declaration each contain a top-level `return`) are skipped sections, indexed but " +
+      "never sliced. Every slice parses standalone under `node --input-type=module --check -` and round-trips " +
+      "byte-exact to its recorded readable line range (through the recorded rename map when rename-map.json " +
+      "carries one). Stylesheet rule — the two inline <style> blocks are wholeFile sections, never sliced. " +
+      "Non-code payloads (MP3 audio, WebP images, favicon.ico and the eight glTF model/geometry JSON payloads) " +
+      "are hashed notRendered records (bytes + sha256, no pretty pass). The CDN dependencies (nine jsdelivr " +
+      "three.js r147 scripts, the Google Fonts stylesheet) were never captured (socker precedent, PLAN §1) and " +
+      "have no derived layer; tools/capture.mjs --check lists them as external off-origin references. The " +
+      "semantic rename layer (tools/names.json → tools/apply-names.mjs, recovered into rename-map.json by " +
+      "tools/recover-scoped-map.mjs, re-applied on every re-cut) names the game's own opaque short bindings " +
+      "(byId, vec3, materials, level constants, scratch objects, audioEngine, …); the script is authored and " +
+      "already semantic, so only the genuinely opaque chunk-scope names are renamed and vendor/global " +
+      "identifiers (THREE.*) are never touched. `node tools/audit.js` is the gate. Capture bytes are untouched " +
+      "by everything above; re-cut with `node tools/derive.mjs` after any capture refresh.",
     renderOptions: {
       _default:
         "prettier 3.9.6, module API, default options, single pass (re-format verified idempotent at derive time) — never the CLI: it respects .gitignore and can silently echo its input",
@@ -626,11 +756,22 @@ async function main() {
       css: "parser css, no plugins (inline <style>)",
       json: "parser json, no plugins (inline importmap blocks, if any)",
     },
+    structure: {
+      moduleBoundaries:
+        "none exposed — the inline script is one classic IIFE (`(() => { … })();`) with 0 import/export " +
+        "occurrences, no factory family and no export table (evidence: tools/probe-structure.mjs). The real " +
+        "structure the bytes declare is the author's 21 top-level section banners; slices are cut at them, " +
+        "and the parts of oversized sections (-a/-b/…) follow the desimayhem semantic-slice precedent.",
+      sourceMaps:
+        "none — 0 sourceMappingURL occurrences and 0 *.map files across the 72 captured files (scanned by " +
+        "tools/probe-structure.mjs), so the derivation stays a prettier/section-slice pass.",
+      sections: `${(scriptSource?.sections?.length ?? 1) - 1} banners → ${scriptSource?.sections?.length ?? 1} sections (with the banner-less boot preamble) → ${slicedTotal} statement-aligned slice windows`,
+    },
     source:
-      `readable/: ${inlineMapBlocks.length} inline twin(s) (1 script → ${scriptSource?.slices ?? 0} statement-aligned slices, ` +
+      `readable/: ${inlineMapBlocks.length} inline twin(s) (1 script → ${scriptSource?.slices ?? 0} section-aligned slices, ` +
       `${cssSources.length} CSS pretties wholeFile); ` +
-      `src/: ${slicedTotal} statement-aligned slice(s); ` +
-      `${sections.filter((s) => s.skipped).length} skipped section(s); ` +
+      `src/: ${slicedTotal} section-aligned slice(s) across ${scriptSource?.sections?.length ?? 0} section(s); ` +
+      `${skippedSections} skipped section(s); ` +
       `${sections.filter((s) => s.wholeFile).length} wholeFile section(s); ` +
       `capture: ${captured.length} files under .upstream/manifest.json; inline scan: ${inlineFiles.join(", ")} ` +
       `(${inlineMapBlocks.length} content block(s)); notRendered: ${notRendered.length} hashed payload record(s).`,
@@ -643,6 +784,17 @@ async function main() {
         "blocks; every content block has a readable twin recorded in readable/index-inline-map.json with its " +
         "exact byte range + sha256. The nine external <script src> loads (jsdelivr three.js r147) are CDN " +
         "dependencies and are not derived.",
+    },
+    rename: {
+      map: "rename-map.json",
+      slices: renamedSlices,
+      names: renamedNames,
+      namesSource: "tools/names.json (reviewed worklist) → tools/apply-names.mjs (scope-aware writer) → recovered by tools/recover-scoped-map.mjs",
+      note:
+        "Semantic renames are recorded per slice in rename-map.json and re-applied on every re-cut. The script " +
+        "is authored (not minified), so the campaign renames only the genuinely opaque chunk-scope names " +
+        "(short utility aliases, scratch vectors/quaternions, level-constant abbreviations); the rest keep the " +
+        "author's own names. THREE.* property names and all globals/vendor identifiers are never renamed.",
     },
     sources,
     sections,
@@ -684,7 +836,9 @@ async function main() {
     const text = fs.readFileSync(abs, "utf8");
     const nl2 = text.indexOf("\n", text.indexOf("\n") + 1);
     const body = text.slice(nl2 + 1);
-    const expected = readLines(path.join(proj, s.sourceFile)).slice(s.startLine - 1, s.endLine).join("\n") + "\n";
+    const raw = readLines(path.join(proj, s.sourceFile)).slice(s.startLine - 1, s.endLine).join("\n") + "\n";
+    const record = recordsFor(renameMap, s.file);
+    const expected = record ? applyRecordedMap(raw, record) : raw;
     if (body !== expected) {
       console.error(`ROUND-TRIP FAIL ${s.file}`);
       bad++;
@@ -704,8 +858,8 @@ async function main() {
   }
   console.log(
     `derive: ${written.readable.size} readable file(s), ${written.src.size} src slices ` +
-      `(${parsed}/${ranged} parse standalone, ${roundOK}/${ranged} round-trip byte-exact), ` +
-      `${sections.filter((s) => s.skipped).length} skipped, ${sections.filter((s) => s.wholeFile).length} wholeFile, ` +
+      `(${parsed}/${ranged} parse standalone, ${roundOK}/${ranged} round-trip byte-exact${renamedSlices ? " through the recorded map" : ""}), ` +
+      `${skippedSections} skipped, ${sections.filter((s) => s.wholeFile).length} wholeFile, ` +
       `${prettyParsed} pretty js parse clean, ${notRendered.length} notRendered, ${pruned} orphan(s) pruned — ` +
       `self-check ${bad ? bad + " FAILURE(S)" : "clean"}`,
   );

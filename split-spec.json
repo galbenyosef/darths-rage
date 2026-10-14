@@ -1,15 +1,20 @@
 {
   "project": "darths-rage",
-  "kind": "statement-aligned-slices",
-  "defaultFile": "src/index-inline-1-01.js",
-  "note": "RAGE (https://darths-rage.netlify.app/) is capture-class: a single-file three.js action game served by Netlify at the origin root. §0.4 fork-over-mirror was checked on 2026-10-13 — no public upstream repo exists (the page carries no github/gitlab/bitbucket reference; a GitHub search finds only unrelated projects), so the mirror stands. Derived pipeline: capture → pinned prettier 3.9.6 (module API, default options, single pass verified idempotent — never the CLI: it respects .gitignore and can silently echo its input) → the entry document's inline <script> becomes readable/index-inline-1.pretty.js and its two inline <style> blocks become readable/index-inline-2|3.pretty.css (every pretty provably NOT byte-identical to its capture block; readable/index-inline-map.json records each block's exact byte range + sha256). The inline script is a SINGLE top-level IIFE (`(() => { … })();`): statement-aligned slices src/index-inline-1-NN.js are cut at the IIFE body's top-level statement boundaries (~250-350 line windows; oversized single declarations stay whole) with an exact 2-line provenance header; the IIFE wrapper head/tail and body statements that are not standalone at module top level (the engine guard contains a top-level `return`) are skipped sections, indexed but never sliced. Every slice parses standalone under `node --input-type=module --check -` and round-trips byte-exact to its recorded readable line range. Stylesheet rule — the two inline <style> blocks are wholeFile sections, never sliced. Non-code payloads (MP3 audio, WebP images, favicon.ico and the twelve glTF model/geometry JSON payloads) are hashed notRendered records (bytes + sha256, no pretty pass). The CDN dependencies (nine jsdelivr three.js r147 scripts, the Google Fonts stylesheet) were never captured (socker precedent, PLAN §1) and have no derived layer; tools/capture.mjs --check lists them as external off-origin references. Identifiers in src/ are the bundle's own minified names — the rename campaign (PLAN §5) is recorded as an open task in README.md, not claimed here. Capture bytes are untouched by everything above; re-cut with `node tools/derive.mjs` after any capture refresh. `node tools/audit.js` is the gate.",
+  "kind": "section-aligned-slices",
+  "defaultFile": "src/boot.js",
+  "note": "RAGE (https://darths-rage.netlify.app/) is capture-class: a single-file three.js action game served by Netlify at the origin root. §0.4 fork-over-mirror was checked on 2026-10-13 — no public upstream repo exists (the page carries no github/gitlab/bitbucket reference; a GitHub search finds only unrelated projects), so the mirror stands. Derived pipeline: capture → pinned prettier 3.9.6 (module API, default options, single pass verified idempotent — never the CLI: it respects .gitignore and can silently echo its input) → the entry document's inline <script> becomes readable/index-inline-1.pretty.js and its two inline <style> blocks become readable/index-inline-1|2.pretty.css (every pretty provably NOT byte-identical to its capture block; readable/index-inline-map.json records each block's exact byte range + sha256). Structure (2026-10-14 pass, evidence tools/probe-structure.mjs): 0 sourceMappingURL occurrences and 0 *.map files across the 72 captured files — no original tree can be reconstructed from maps; the inline script is one classic IIFE with 0 import/export occurrences and no factory family, so the real structure the bytes expose is the author's own 21 top-level section banners (`/* ===== level ===== */`, two-space indent). src/ slices are cut at those section boundaries (35 statement-aligned slice windows: sections longer than the 350-line cap split into -a/-b/... parts) and named after the sections (src/boot.js, src/level-a.js, src/updates-c.js, …). The IIFE wrapper head/tail and body statements that are not standalone at module top level (the engine guard, the renderer try guard and the sfx declaration each contain a top-level `return`) are skipped sections, indexed but never sliced. Every slice parses standalone under `node --input-type=module --check -` and round-trips byte-exact to its recorded readable line range (through the recorded rename map when rename-map.json carries one). Stylesheet rule — the two inline <style> blocks are wholeFile sections, never sliced. Non-code payloads (MP3 audio, WebP images, favicon.ico and the eight glTF model/geometry JSON payloads) are hashed notRendered records (bytes + sha256, no pretty pass). The CDN dependencies (nine jsdelivr three.js r147 scripts, the Google Fonts stylesheet) were never captured (socker precedent, PLAN §1) and have no derived layer; tools/capture.mjs --check lists them as external off-origin references. The semantic rename layer (tools/names.json → tools/apply-names.mjs, recovered into rename-map.json by tools/recover-scoped-map.mjs, re-applied on every re-cut) names the game's own opaque short bindings (byId, vec3, materials, level constants, scratch objects, audioEngine, …); the script is authored and already semantic, so only the genuinely opaque chunk-scope names are renamed and vendor/global identifiers (THREE.*) are never touched. `node tools/audit.js` is the gate. Capture bytes are untouched by everything above; re-cut with `node tools/derive.mjs` after any capture refresh.",
   "renderOptions": {
     "_default": "prettier 3.9.6, module API, default options, single pass (re-format verified idempotent at derive time) — never the CLI: it respects .gitignore and can silently echo its input",
     "js": "parser babel, no plugins (inline <script>)",
     "css": "parser css, no plugins (inline <style>)",
     "json": "parser json, no plugins (inline importmap blocks, if any)"
   },
-  "source": "readable/: 3 inline twin(s) (1 script → 28 statement-aligned slices, 2 CSS pretties wholeFile); src/: 28 statement-aligned slice(s); 5 skipped section(s); 2 wholeFile section(s); capture: 72 files under .upstream/manifest.json; inline scan: index.html (3 content block(s)); notRendered: 71 hashed payload record(s).",
+  "structure": {
+    "moduleBoundaries": "none exposed — the inline script is one classic IIFE (`(() => { … })();`) with 0 import/export occurrences, no factory family and no export table (evidence: tools/probe-structure.mjs). The real structure the bytes declare is the author's 21 top-level section banners; slices are cut at them, and the parts of oversized sections (-a/-b/…) follow the desimayhem semantic-slice precedent.",
+    "sourceMaps": "none — 0 sourceMappingURL occurrences and 0 *.map files across the 72 captured files (scanned by tools/probe-structure.mjs), so the derivation stays a prettier/section-slice pass.",
+    "sections": "21 banners → 22 sections (with the banner-less boot preamble) → 35 statement-aligned slice windows"
+  },
+  "source": "readable/: 3 inline twin(s) (1 script → 35 section-aligned slices, 2 CSS pretties wholeFile); src/: 35 section-aligned slice(s) across 22 section(s); 5 skipped section(s); 2 wholeFile section(s); capture: 72 files under .upstream/manifest.json; inline scan: index.html (3 content block(s)); notRendered: 71 hashed payload record(s).",
   "inline": {
     "scanned": [
       "index.html"
@@ -17,6 +22,13 @@
     "contentBlocks": 3,
     "notRendered": 0,
     "note": "the entry document carries one inline <script> (the whole game, 170,041 B) and two inline <style> blocks; every content block has a readable twin recorded in readable/index-inline-map.json with its exact byte range + sha256. The nine external <script src> loads (jsdelivr three.js r147) are CDN dependencies and are not derived."
+  },
+  "rename": {
+    "map": "rename-map.json",
+    "slices": 34,
+    "names": 46,
+    "namesSource": "tools/names.json (reviewed worklist) → tools/apply-names.mjs (scope-aware writer) → recovered by tools/recover-scoped-map.mjs",
+    "note": "Semantic renames are recorded per slice in rename-map.json and re-applied on every re-cut. The script is authored (not minified), so the campaign renames only the genuinely opaque chunk-scope names (short utility aliases, scratch vectors/quaternions, level-constant abbreviations); the rest keep the author's own names. THREE.* property names and all globals/vendor identifiers are never renamed."
   },
   "sources": [
     {
@@ -62,9 +74,82 @@
       "prettyPasses": 1,
       "idempotent": true,
       "tag": "index-inline-1",
-      "slicingMode": "iife-body",
-      "slices": 28,
-      "derived": "readable + 28 statement-aligned slice(s) + 5 skipped section(s)"
+      "slicingMode": "iife-body-section-aligned",
+      "slices": 35,
+      "skipped": 5,
+      "sections": [
+        "boot",
+        "helpers",
+        "renderer",
+        "textures",
+        "materials",
+        "level",
+        "space",
+        "lights",
+        "Sevrane",
+        "soldiers",
+        "particles",
+        "audio",
+        "state",
+        "input",
+        "speech",
+        "combat helpers",
+        "poses",
+        "updates",
+        "camera",
+        "modes",
+        "HUD",
+        "loop"
+      ],
+      "renameBindings": {
+        "$": "byId",
+        "V3": "vec3",
+        "glc": "glCanvas",
+        "fx": "fxCanvas",
+        "PR": "pixelRatio",
+        "tr": "seededRange",
+        "trand": "seededRandom",
+        "tseed": "seed",
+        "DW": "DOOR_W",
+        "DH": "DOOR_H",
+        "M": "materials",
+        "CW": "CORRIDOR_W",
+        "CH": "CORRIDOR_H",
+        "BW": "BAY_W",
+        "BH": "BAY_H",
+        "mk": "makeMesh",
+        "P": "sevraneParts",
+        "UP": "upAxis",
+        "QI": "identityQuat",
+        "_q": "scratchQuat",
+        "_q2": "scratchQuat2",
+        "_qp": "scratchQuatParent",
+        "_a": "scratchVecA",
+        "_b": "scratchVecB",
+        "_d": "scratchVecD",
+        "_e": "scratchVecE",
+        "_c2": "scratchBladeDir",
+        "_cm": "scratchMatrix",
+        "_cm2": "scratchMatrix2",
+        "_one": "unitScale",
+        "_ta": "scratchTroopA",
+        "_tb": "scratchTroopB",
+        "_tc": "scratchTroopC",
+        "_td": "scratchTroopD",
+        "_qd1": "scratchDoorQuat1",
+        "_qd2": "scratchDoorQuat2",
+        "_qd3": "scratchDoorQuat3",
+        "_ax": "scratchDoorAxis",
+        "G": "soldierGeo",
+        "TR": "trooperModel",
+        "TRB": "trooperBones",
+        "CR": "crateHalf",
+        "A": "audioEngine",
+        "T": "elapsed",
+        "lb": "letterbox",
+        "q": "inputLatch"
+      },
+      "derived": "readable + 35 section-aligned slice(s) + 5 skipped section(s) (34 through the recorded rename map)"
     }
   ],
   "sections": [
@@ -100,12 +185,13 @@
       "lastLine": "(() => {"
     },
     {
-      "file": "index-inline-1-01.js",
-      "title": "index-inline-1 01 — getelementbyid",
-      "desc": "Lines 2-3. Markers: getelementbyid(1).",
+      "file": "boot.js",
+      "title": "entry helper",
+      "desc": "Section \"boot\" of the inline script. Lines 2-3. Markers: byid(1), getelementbyid(1). Range re-cut through the recorded semantic rename map.",
       "startLine": 2,
       "endLine": 3,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "boot"
     },
     {
       "file": "index-inline-1-nonstandalone-3.js",
@@ -113,18 +199,28 @@
       "title": "index-inline-1 — non-standalone statement (top-level return, not sliced)",
       "desc": "Lines 4-9. This statement is only valid inside the IIFE (it contains a top-level `return`), so it is indexed only — it would not parse standalone.",
       "startLine": 4,
-      "endLine": 11,
+      "endLine": 10,
       "sourceFile": "readable/index-inline-1.pretty.js",
       "firstLine": "  if (!window.THREE || !THREE.EffectComposer) {",
-      "lastLine": "  /* ================= helpers ================= */"
+      "lastLine": ""
     },
     {
-      "file": "index-inline-1-02.js",
-      "title": "index-inline-1 02 — math",
-      "desc": "Lines 12-31. Markers: math(7), matches(2).",
-      "startLine": 12,
+      "file": "helpers.js",
+      "title": "helpers",
+      "desc": "Section \"helpers\" of the inline script. Lines 11-26. Markers: math(7), matches(2). Range re-cut through the recorded semantic rename map.",
+      "startLine": 11,
+      "endLine": 26,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "helpers"
+    },
+    {
+      "file": "renderer-a.js",
+      "title": "renderer (part 1 of 2)",
+      "desc": "Section \"renderer\" of the inline script. Lines 27-31. Markers: byid(2), fxcanvas(2). Range re-cut through the recorded semantic rename map.",
+      "startLine": 27,
       "endLine": 31,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "renderer"
     },
     {
       "file": "index-inline-1-nonstandalone-16.js",
@@ -138,124 +234,157 @@
       "lastLine": "  }"
     },
     {
-      "file": "index-inline-1-03.js",
-      "title": "index-inline-1 03 — fillstyle",
-      "desc": "Lines 42-387. Markers: fillstyle(34), fillrect(30).",
+      "file": "renderer-b.js",
+      "title": "renderer (part 2 of 2)",
+      "desc": "Section \"renderer\" of the inline script. Lines 42-107. Markers: three(11), renderer(7). Range re-cut through the recorded semantic rename map.",
       "startLine": 42,
-      "endLine": 387,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "endLine": 107,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "renderer"
     },
     {
-      "file": "index-inline-1-04.js",
-      "title": "index-inline-1 04 — three",
-      "desc": "Lines 388-590. Markers: three(55), color(42).",
-      "startLine": 388,
+      "file": "textures.js",
+      "title": "textures",
+      "desc": "Section \"textures\" of the inline script. Lines 108-386. Markers: fillstyle(34), fillrect(30). Range re-cut through the recorded semantic rename map.",
+      "startLine": 108,
+      "endLine": 386,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "textures"
+    },
+    {
+      "file": "materials.js",
+      "title": "materials",
+      "desc": "Section \"materials\" of the inline script. Lines 387-556. Markers: three(51), color(42). Range re-cut through the recorded semantic rename map.",
+      "startLine": 387,
+      "endLine": 556,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "materials"
+    },
+    {
+      "file": "level-a.js",
+      "title": "level (part 1 of 3)",
+      "desc": "Section \"level\" of the inline script. Lines 557-590. Markers: mat(7), bumpmap(5). Range re-cut through the recorded semantic rename map.",
+      "startLine": 557,
       "endLine": 590,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "level"
     },
     {
-      "file": "index-inline-1-05.js",
-      "title": "index-inline-1 05 — three",
-      "desc": "Oversized single declaration (kept whole). Lines 591-955. Markers: three(33), sec(24).",
+      "file": "level-b.js",
+      "title": "level (part 2 of 3)",
+      "desc": "Section \"level\" of the inline script. Lines 591-955. Markers: three(33), materials(29). Range re-cut through the recorded semantic rename map.",
       "startLine": 591,
       "endLine": 955,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "level"
     },
     {
-      "file": "index-inline-1-06.js",
-      "title": "index-inline-1 06 — three",
-      "desc": "Lines 956-1180. Markers: three(25), math(20).",
+      "file": "level-c.js",
+      "title": "level (part 3 of 3)",
+      "desc": "Section \"level\" of the inline script. Lines 956-1177. Markers: three(24), door_h(20). Range re-cut through the recorded semantic rename map.",
       "startLine": 956,
-      "endLine": 1180,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "endLine": 1177,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "level"
     },
     {
-      "file": "index-inline-1-07.js",
-      "title": "index-inline-1 07 — three",
-      "desc": "Lines 1181-1524. Markers: three(47), add(26).",
-      "startLine": 1181,
-      "endLine": 1524,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "space.js",
+      "title": "space",
+      "desc": "Section \"space\" of the inline script. Lines 1178-1478. Markers: three(39), add(21). Range re-cut through the recorded semantic rename map.",
+      "startLine": 1178,
+      "endLine": 1478,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "space"
     },
     {
-      "file": "index-inline-1-08.js",
-      "title": "index-inline-1 08 — three",
-      "desc": "Lines 1525-1767. Markers: three(29), math(24).",
-      "startLine": 1525,
-      "endLine": 1767,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "lights.js",
+      "title": "lights",
+      "desc": "Section \"lights\" of the inline script. Lines 1479-1748. Markers: three(36), math(26). Range re-cut through the recorded semantic rename map.",
+      "startLine": 1479,
+      "endLine": 1748,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "lights"
     },
     {
-      "file": "index-inline-1-09.js",
-      "title": "index-inline-1 09 — three",
-      "desc": "Lines 1768-2114. Markers: three(64), body(23).",
-      "startLine": 1768,
-      "endLine": 2114,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "sevrane-a.js",
+      "title": "Sevrane (part 1 of 3)",
+      "desc": "Section \"Sevrane\" of the inline script. Lines 1749-2092. Markers: three(65), makemesh(29). Range re-cut through the recorded semantic rename map.",
+      "startLine": 1749,
+      "endLine": 2092,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "Sevrane"
     },
     {
-      "file": "index-inline-1-10.js",
-      "title": "index-inline-1 10 — three",
-      "desc": "Lines 2115-2379. Markers: three(28), sev(23).",
-      "startLine": 2115,
+      "file": "sevrane-b.js",
+      "title": "Sevrane (part 2 of 3)",
+      "desc": "Section \"Sevrane\" of the inline script. Lines 2093-2379. Markers: three(29), sev(23). Range re-cut through the recorded semantic rename map.",
+      "startLine": 2093,
       "endLine": 2379,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "Sevrane"
     },
     {
-      "file": "index-inline-1-11.js",
-      "title": "index-inline-1 11 — sev",
-      "desc": "Lines 2380-2671. Markers: sev(94), three(26).",
+      "file": "sevrane-c.js",
+      "title": "Sevrane (part 3 of 3)",
+      "desc": "Section \"Sevrane\" of the inline script. Lines 2380-2630. Markers: sev(94), the(23). Range re-cut through the recorded semantic rename map.",
       "startLine": 2380,
-      "endLine": 2671,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "endLine": 2630,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "Sevrane"
     },
     {
-      "file": "index-inline-1-12.js",
-      "title": "index-inline-1 12 — three",
-      "desc": "Lines 2672-3017. Markers: three(26), add(17).",
-      "startLine": 2672,
-      "endLine": 3017,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "soldiers-a.js",
+      "title": "soldiers (part 1 of 4)",
+      "desc": "Section \"soldiers\" of the inline script. Lines 2631-2836. Markers: three(32), add(16). Range re-cut through the recorded semantic rename map.",
+      "startLine": 2631,
+      "endLine": 2836,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "soldiers"
     },
     {
-      "file": "index-inline-1-13.js",
-      "title": "index-inline-1 13 — three",
-      "desc": "Lines 3018-3263. Markers: three(28), math(11).",
-      "startLine": 3018,
-      "endLine": 3263,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "soldiers-b.js",
+      "title": "soldiers (part 2 of 4)",
+      "desc": "Section \"soldiers\" of the inline script. Lines 2837-3177. Markers: three(24), rnd(14). Range re-cut through the recorded semantic rename map.",
+      "startLine": 2837,
+      "endLine": 3177,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "soldiers"
     },
     {
-      "file": "index-inline-1-14.js",
-      "title": "index-inline-1 14 — pos",
-      "desc": "Lines 3264-3431. Markers: pos(47), math(24).",
-      "startLine": 3264,
+      "file": "soldiers-c.js",
+      "title": "soldiers (part 3 of 4)",
+      "desc": "Section \"soldiers\" of the inline script. Lines 3178-3431. Markers: pos(56), cratehalf(32). Range re-cut through the recorded semantic rename map.",
+      "startLine": 3178,
       "endLine": 3431,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "soldiers"
     },
     {
-      "file": "index-inline-1-15.js",
-      "title": "index-inline-1 15 — getworldposition",
-      "desc": "Lines 3432-3779. Markers: getworldposition(22), side(21).",
+      "file": "soldiers-d.js",
+      "title": "soldiers (part 4 of 4)",
+      "desc": "Section \"soldiers\" of the inline script. Lines 3432-3757. Markers: getworldposition(22), scratchtroopa(22). Range re-cut through the recorded semantic rename map.",
       "startLine": 3432,
-      "endLine": 3779,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "endLine": 3757,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "soldiers"
     },
     {
-      "file": "index-inline-1-16.js",
-      "title": "index-inline-1 16 — connect",
-      "desc": "Lines 3780-4117. Markers: connect(22), rnd(16).",
-      "startLine": 3780,
-      "endLine": 4117,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "particles.js",
+      "title": "particles",
+      "desc": "Section \"particles\" of the inline script. Lines 3758-3910. Markers: three(22), rnd(16). Range re-cut through the recorded semantic rename map.",
+      "startLine": 3758,
+      "endLine": 3910,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "particles"
     },
     {
-      "file": "index-inline-1-17.js",
-      "title": "index-inline-1 17 — src",
-      "desc": "Lines 4118-4227. Markers: src(11), connect(8).",
-      "startLine": 4118,
+      "file": "audio.js",
+      "title": "audio",
+      "desc": "Section \"audio\" of the inline script. Lines 3911-4227. Markers: audioengine(114), connect(30). Range re-cut through the recorded semantic rename map.",
+      "startLine": 3911,
       "endLine": 4227,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "audio"
     },
     {
       "file": "index-inline-1-nonstandalone-242.js",
@@ -263,98 +392,145 @@
       "title": "index-inline-1 — non-standalone statement (top-level return, not sliced)",
       "desc": "Lines 4228-4440. This statement is only valid inside the IIFE (it contains a top-level `return`), so it is indexed only — it would not parse standalone.",
       "startLine": 4228,
-      "endLine": 4442,
+      "endLine": 4441,
       "sourceFile": "readable/index-inline-1.pretty.js",
       "firstLine": "  const sfx = {",
-      "lastLine": "  /* ================= state ================= */"
+      "lastLine": ""
     },
     {
-      "file": "index-inline-1-18.js",
-      "title": "index-inline-1 18 — player",
-      "desc": "Lines 4443-4791. Markers: player(22), key(14).",
-      "startLine": 4443,
-      "endLine": 4791,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "state.js",
+      "title": "state",
+      "desc": "Section \"state\" of the inline script. Lines 4442-4643. Markers: player(19), visible(9). Range re-cut through the recorded semantic rename map.",
+      "startLine": 4442,
+      "endLine": 4643,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "state"
     },
     {
-      "file": "index-inline-1-19.js",
-      "title": "index-inline-1 19 — pos",
-      "desc": "Lines 4792-5026. Markers: pos(18), rnd(16).",
-      "startLine": 4792,
-      "endLine": 5026,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "input.js",
+      "title": "input",
+      "desc": "Section \"input\" of the inline script. Lines 4644-4790. Markers: key(13), addeventlistener(12). Range re-cut through the recorded semantic rename map.",
+      "startLine": 4644,
+      "endLine": 4790,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "input"
     },
     {
-      "file": "index-inline-1-20.js",
-      "title": "index-inline-1 20 — three",
-      "desc": "Lines 5027-5307. Markers: three(24), math(17).",
-      "startLine": 5027,
-      "endLine": 5307,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "speech.js",
+      "title": "speech",
+      "desc": "Section \"speech\" of the inline script. Lines 4791-4855. Markers: force(2), pos(2).",
+      "startLine": 4791,
+      "endLine": 4855,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "speech"
     },
     {
-      "file": "index-inline-1-21.js",
-      "title": "index-inline-1 21 — pos",
-      "desc": "Lines 5308-5622. Markers: pos(42), math(29).",
-      "startLine": 5308,
-      "endLine": 5622,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "combat-helpers-a.js",
+      "title": "combat helpers (part 1 of 3)",
+      "desc": "Section \"combat helpers\" of the inline script. Lines 4856-5185. Markers: three(33), pos(23). Range re-cut through the recorded semantic rename map.",
+      "startLine": 4856,
+      "endLine": 5185,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "combat helpers"
     },
     {
-      "file": "index-inline-1-22.js",
-      "title": "index-inline-1 22 — lerp",
-      "desc": "Lines 5623-5948. Markers: lerp(35), math(32).",
-      "startLine": 5623,
-      "endLine": 5948,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "combat-helpers-b.js",
+      "title": "combat helpers (part 2 of 3)",
+      "desc": "Section \"combat helpers\" of the inline script. Lines 5186-5532. Markers: pos(39), math(33). Range re-cut through the recorded semantic rename map.",
+      "startLine": 5186,
+      "endLine": 5532,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "combat helpers"
     },
     {
-      "file": "index-inline-1-23.js",
-      "title": "index-inline-1 23 — pos",
-      "desc": "Oversized single declaration (kept whole). Lines 5949-6379. Markers: pos(50), math(47).",
-      "startLine": 5949,
+      "file": "combat-helpers-c.js",
+      "title": "combat helpers (part 3 of 3)",
+      "desc": "Section \"combat helpers\" of the inline script. Lines 5533-5616. Markers: pos(10), tmpv(10). Range re-cut through the recorded semantic rename map.",
+      "startLine": 5533,
+      "endLine": 5616,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "combat helpers"
+    },
+    {
+      "file": "poses.js",
+      "title": "poses",
+      "desc": "Section \"poses\" of the inline script. Lines 5617-5947. Markers: lerp(35), math(32). Range re-cut through the recorded semantic rename map.",
+      "startLine": 5617,
+      "endLine": 5947,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "poses"
+    },
+    {
+      "file": "updates-a.js",
+      "title": "updates (part 1 of 4)",
+      "desc": "Section \"updates\" of the inline script. Lines 5948-6379. Markers: pos(50), math(47). Range re-cut through the recorded semantic rename map.",
+      "startLine": 5948,
       "endLine": 6379,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "updates"
     },
     {
-      "file": "index-inline-1-24.js",
-      "title": "index-inline-1 24 — pos",
-      "desc": "Lines 6380-6688. Markers: pos(55), math(33).",
+      "file": "updates-b.js",
+      "title": "updates (part 2 of 4)",
+      "desc": "Section \"updates\" of the inline script. Lines 6380-6688. Markers: pos(55), math(33). Range re-cut through the recorded semantic rename map.",
       "startLine": 6380,
       "endLine": 6688,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "updates"
     },
     {
-      "file": "index-inline-1-25.js",
-      "title": "index-inline-1 25 — math",
-      "desc": "Lines 6689-6997. Markers: math(28), card(18).",
+      "file": "updates-c.js",
+      "title": "updates (part 3 of 4)",
+      "desc": "Section \"updates\" of the inline script. Lines 6689-6997. Markers: math(28), card(18). Range re-cut through the recorded semantic rename map.",
       "startLine": 6689,
       "endLine": 6997,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "updates"
     },
     {
-      "file": "index-inline-1-26.js",
-      "title": "index-inline-1 26 — math",
-      "desc": "Lines 6998-7274. Markers: math(28), position(28).",
+      "file": "updates-d.js",
+      "title": "updates (part 4 of 4)",
+      "desc": "Section \"updates\" of the inline script. Lines 6998-7272. Markers: math(28), position(28). Range re-cut through the recorded semantic rename map.",
       "startLine": 6998,
-      "endLine": 7274,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "endLine": 7272,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "updates"
     },
     {
-      "file": "index-inline-1-27.js",
-      "title": "index-inline-1 27 — camstate",
-      "desc": "Lines 7275-7606. Markers: camstate(37), pos(35).",
-      "startLine": 7275,
-      "endLine": 7606,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "file": "camera.js",
+      "title": "camera",
+      "desc": "Section \"camera\" of the inline script. Lines 7273-7413. Markers: camstate(38), pos(30). Range re-cut through the recorded semantic rename map.",
+      "startLine": 7273,
+      "endLine": 7413,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "camera"
     },
     {
-      "file": "index-inline-1-28.js",
-      "title": "index-inline-1 28 — mode",
-      "desc": "Lines 7607-7868. Markers: mode(32), player(24).",
-      "startLine": 7607,
+      "file": "modes.js",
+      "title": "modes",
+      "desc": "Section \"modes\" of the inline script. Lines 7414-7598. Markers: glow(13), math(12). Range re-cut through the recorded semantic rename map.",
+      "startLine": 7414,
+      "endLine": 7598,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "modes"
+    },
+    {
+      "file": "hud.js",
+      "title": "HUD",
+      "desc": "Section \"HUD\" of the inline script. Lines 7599-7704. Markers: pos(9), fctx(8). Range re-cut through the recorded semantic rename map.",
+      "startLine": 7599,
+      "endLine": 7704,
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "HUD"
+    },
+    {
+      "file": "loop.js",
+      "title": "loop",
+      "desc": "Section \"loop\" of the inline script. Lines 7705-7868. Markers: mode(29), player(16). Range re-cut through the recorded semantic rename map.",
+      "startLine": 7705,
       "endLine": 7868,
-      "sourceFile": "readable/index-inline-1.pretty.js"
+      "sourceFile": "readable/index-inline-1.pretty.js",
+      "section": "loop"
     },
     {
       "file": "index-inline-1-wrapper-tail.js",

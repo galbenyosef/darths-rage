@@ -1,0 +1,398 @@
+{
+  "note": "Semantic rename map for src/, recovered mechanically by anchor alignment from the committed slices (tools/recover-scoped-map.mjs): the token streams of a slice and its readable range must be identical in every non-identifier position, so every differing identifier pair is a proven rename, not a guess. `files` is a word-boundary map, used only where a name means the same thing everywhere in the slice and is never a property or object key; `scoped` addresses the rest by exact token index as { name: [[i, target], …] }. tools/derive.mjs re-applies this map when it re-cuts src/ (index-validated), tools/verify-rename.mjs and tools/audit.js re-prove every slice from it, and tools/check-chunk.mjs proves cross-slice references still resolve. Regenerate with `node tools/recover-scoped-map.mjs` after any rename batch.",
+  "files": {
+    "audio.js": {
+      "A": "audioEngine"
+    },
+    "boot.js": {
+      "$": "byId"
+    },
+    "camera.js": {
+      "BH": "BAY_H",
+      "BW": "BAY_W",
+      "CW": "CORRIDOR_W",
+      "DH": "DOOR_H",
+      "DW": "DOOR_W",
+      "T": "elapsed",
+      "V3": "vec3"
+    },
+    "combat-helpers-a.js": {
+      "G": "soldierGeo",
+      "M": "materials",
+      "P": "sevraneParts",
+      "TR": "trooperModel",
+      "UP": "upAxis",
+      "V3": "vec3"
+    },
+    "combat-helpers-b.js": {
+      "BW": "BAY_W",
+      "CW": "CORRIDOR_W",
+      "P": "sevraneParts",
+      "TR": "trooperModel",
+      "UP": "upAxis",
+      "V3": "vec3"
+    },
+    "combat-helpers-c.js": {
+      "DH": "DOOR_H",
+      "DW": "DOOR_W",
+      "V3": "vec3"
+    },
+    "helpers.js": {
+      "V3": "vec3"
+    },
+    "hud.js": {
+      "$": "byId",
+      "PR": "pixelRatio",
+      "fx": "fxCanvas"
+    },
+    "input.js": {
+      "$": "byId",
+      "A": "audioEngine",
+      "T": "elapsed",
+      "q": "inputLatch"
+    },
+    "level-a.js": {
+      "BH": "BAY_H",
+      "BW": "BAY_W",
+      "CH": "CORRIDOR_H",
+      "CW": "CORRIDOR_W",
+      "V3": "vec3"
+    },
+    "level-b.js": {
+      "BH": "BAY_H",
+      "BW": "BAY_W",
+      "CH": "CORRIDOR_H",
+      "CW": "CORRIDOR_W",
+      "M": "materials",
+      "V3": "vec3",
+      "tr": "seededRange",
+      "trand": "seededRandom"
+    },
+    "level-c.js": {
+      "CH": "CORRIDOR_H",
+      "DH": "DOOR_H",
+      "DW": "DOOR_W",
+      "M": "materials"
+    },
+    "lights.js": {
+      "CH": "CORRIDOR_H",
+      "CW": "CORRIDOR_W",
+      "M": "materials",
+      "T": "elapsed",
+      "V3": "vec3"
+    },
+    "loop.js": {
+      "A": "audioEngine",
+      "P": "sevraneParts",
+      "T": "elapsed",
+      "q": "inputLatch"
+    },
+    "materials.js": {
+      "M": "materials"
+    },
+    "modes.js": {
+      "$": "byId",
+      "A": "audioEngine",
+      "M": "materials",
+      "P": "sevraneParts",
+      "T": "elapsed",
+      "V3": "vec3",
+      "q": "inputLatch"
+    },
+    "particles.js": {
+      "M": "materials",
+      "V3": "vec3"
+    },
+    "poses.js": {
+      "P": "sevraneParts",
+      "T": "elapsed"
+    },
+    "renderer-a.js": {
+      "$": "byId",
+      "fx": "fxCanvas",
+      "glc": "glCanvas"
+    },
+    "renderer-b.js": {
+      "PR": "pixelRatio",
+      "fx": "fxCanvas"
+    },
+    "sevrane-a.js": {
+      "M": "materials",
+      "P": "sevraneParts",
+      "QI": "identityQuat",
+      "UP": "upAxis",
+      "V3": "vec3",
+      "_a": "scratchVecA",
+      "_b": "scratchVecB",
+      "_c2": "scratchBladeDir",
+      "_d": "scratchVecD",
+      "_e": "scratchVecE",
+      "_q": "scratchQuat",
+      "_q2": "scratchQuat2",
+      "_qp": "scratchQuatParent",
+      "mk": "makeMesh"
+    },
+    "sevrane-b.js": {
+      "$": "byId",
+      "M": "materials",
+      "QI": "identityQuat",
+      "_a": "scratchVecA",
+      "_b": "scratchVecB",
+      "_d": "scratchVecD",
+      "_q2": "scratchQuat2",
+      "_qp": "scratchQuatParent"
+    },
+    "sevrane-c.js": {
+      "P": "sevraneParts",
+      "QI": "identityQuat",
+      "T": "elapsed",
+      "UP": "upAxis",
+      "V3": "vec3",
+      "_a": "scratchVecA",
+      "_b": "scratchVecB",
+      "_c2": "scratchBladeDir",
+      "_d": "scratchVecD",
+      "_e": "scratchVecE",
+      "_q": "scratchQuat",
+      "_q2": "scratchQuat2"
+    },
+    "soldiers-a.js": {
+      "G": "soldierGeo",
+      "M": "materials",
+      "TR": "trooperModel",
+      "TRB": "trooperBones",
+      "V3": "vec3"
+    },
+    "soldiers-b.js": {
+      "BW": "BAY_W",
+      "CR": "crateHalf",
+      "TR": "trooperModel",
+      "TRB": "trooperBones",
+      "UP": "upAxis",
+      "V3": "vec3",
+      "_cm": "scratchMatrix",
+      "_cm2": "scratchMatrix2",
+      "_one": "unitScale"
+    },
+    "soldiers-c.js": {
+      "BW": "BAY_W",
+      "CH": "CORRIDOR_H",
+      "CR": "crateHalf",
+      "T": "elapsed",
+      "UP": "upAxis",
+      "V3": "vec3",
+      "_e": "scratchVecE",
+      "_q": "scratchQuat",
+      "_ta": "scratchTroopA",
+      "_tb": "scratchTroopB",
+      "_tc": "scratchTroopC",
+      "_td": "scratchTroopD"
+    },
+    "soldiers-d.js": {
+      "TR": "trooperModel",
+      "V3": "vec3",
+      "_ta": "scratchTroopA",
+      "_tb": "scratchTroopB",
+      "_tc": "scratchTroopC",
+      "_td": "scratchTroopD"
+    },
+    "space.js": {
+      "M": "materials",
+      "V3": "vec3"
+    },
+    "state.js": {
+      "$": "byId",
+      "DH": "DOOR_H",
+      "M": "materials",
+      "P": "sevraneParts",
+      "V3": "vec3",
+      "lb": "letterbox",
+      "q": "inputLatch"
+    },
+    "textures.js": {
+      "DH": "DOOR_H",
+      "DW": "DOOR_W",
+      "tr": "seededRange",
+      "trand": "seededRandom",
+      "tseed": "seed"
+    },
+    "updates-a.js": {
+      "BW": "BAY_W",
+      "CR": "crateHalf",
+      "CW": "CORRIDOR_W",
+      "DH": "DOOR_H",
+      "DW": "DOOR_W",
+      "P": "sevraneParts",
+      "T": "elapsed",
+      "TR": "trooperModel",
+      "V3": "vec3",
+      "_e": "scratchVecE",
+      "_q": "scratchQuat"
+    },
+    "updates-b.js": {
+      "BW": "BAY_W",
+      "CW": "CORRIDOR_W",
+      "TR": "trooperModel",
+      "V3": "vec3"
+    },
+    "updates-c.js": {
+      "BW": "BAY_W",
+      "CH": "CORRIDOR_H",
+      "CW": "CORRIDOR_W",
+      "DH": "DOOR_H",
+      "M": "materials",
+      "P": "sevraneParts",
+      "T": "elapsed",
+      "UP": "upAxis",
+      "V3": "vec3",
+      "_ax": "scratchDoorAxis",
+      "_qd1": "scratchDoorQuat1",
+      "_qd2": "scratchDoorQuat2",
+      "_qd3": "scratchDoorQuat3"
+    },
+    "updates-d.js": {
+      "BW": "BAY_W",
+      "CW": "CORRIDOR_W",
+      "P": "sevraneParts",
+      "T": "elapsed"
+    }
+  },
+  "scoped": {
+    "camera.js": {
+      "CH": [
+        [
+          546,
+          "CORRIDOR_H"
+        ]
+      ]
+    },
+    "combat-helpers-a.js": {
+      "T": [
+        [
+          110,
+          "elapsed"
+        ],
+        [
+          120,
+          "elapsed"
+        ]
+      ]
+    },
+    "combat-helpers-b.js": {
+      "T": [
+        [
+          212,
+          "elapsed"
+        ],
+        [
+          229,
+          "elapsed"
+        ]
+      ]
+    },
+    "loop.js": {
+      "lb": [
+        [
+          541,
+          "letterbox"
+        ],
+        [
+          545,
+          "letterbox"
+        ],
+        [
+          592,
+          "letterbox"
+        ]
+      ]
+    },
+    "sevrane-b.js": {
+      "P": [
+        [
+          1386,
+          "sevraneParts"
+        ],
+        [
+          1399,
+          "sevraneParts"
+        ],
+        [
+          1503,
+          "sevraneParts"
+        ],
+        [
+          1508,
+          "sevraneParts"
+        ],
+        [
+          1523,
+          "sevraneParts"
+        ]
+      ]
+    },
+    "soldiers-c.js": {
+      "BH": [
+        [
+          1333,
+          "BAY_H"
+        ]
+      ]
+    },
+    "soldiers-d.js": {
+      "T": [
+        [
+          419,
+          "elapsed"
+        ],
+        [
+          434,
+          "elapsed"
+        ],
+        [
+          1589,
+          "elapsed"
+        ],
+        [
+          1609,
+          "elapsed"
+        ],
+        [
+          2172,
+          "elapsed"
+        ],
+        [
+          2600,
+          "elapsed"
+        ]
+      ]
+    },
+    "state.js": {
+      "T": [
+        [
+          5,
+          "elapsed"
+        ]
+      ]
+    },
+    "updates-a.js": {
+      "q": [
+        [
+          784,
+          "inputLatch"
+        ],
+        [
+          1163,
+          "inputLatch"
+        ]
+      ]
+    },
+    "updates-c.js": {
+      "BH": [
+        [
+          1951,
+          "BAY_H"
+        ]
+      ]
+    }
+  }
+}
