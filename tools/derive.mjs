@@ -308,7 +308,7 @@ async function main() {
   let wholeFileTotal = 0;
 
   // ── section-aligned slicing of one script source (pretty text) ─────────
-  async function sliceScript({ rel, captureKind, captureByteStart, captureByteEnd, captureSha256, captureBytesLen, tag, pretty, sourceFile }) {
+  async function sliceScript({ rel, captureKind, captureByteStart, captureByteEnd, captureSha256, captureBytesLen, tag, pretty, sourceFile, captureText }) {
     const lines = linesOf(pretty);
     const dbg = await prettier.__debug.parse(pretty, { parser: "babel" });
     const program = (dbg.ast.program || dbg.ast).body;
@@ -355,6 +355,43 @@ async function main() {
       if (stmts[i].startLine <= stmts[i - 1].endLine)
         throw new Error(`${rel}: statements ${i - 1}/${i} share a line — cannot slice at line boundaries`);
 
+    // ── the SERVED capture's own statements ──────────────────────────────
+    // An index-only (skipped) tail records no `text`, so the public-export-name
+    // gate has no derived text for it and falls back to the PRISTINE's own
+    // lines: the pristine compared with itself, a comparison that can never
+    // fail. `text` breaks that tautology — it records the SERVED capture's own
+    // bytes for the tail's region (here: the entry document's inline script),
+    // which is a different file from the pristine (the reading copy).
+    //
+    // The capture's inline script and the reading copy are the SAME source,
+    // formatted differently, so their statements correspond one for one. The
+    // correspondence is asserted, not assumed: a capture that changed shape
+    // fails loudly here rather than recording a text that does not belong to
+    // the tail.
+    const capDbg = await prettier.__debug.parse(captureText, { parser: "babel" });
+    const capProgram = (capDbg.ast.program || capDbg.ast).body;
+    let capInner = capProgram;
+    let capIifeFn = null;
+    if (capProgram.length === 1 && capProgram[0].type === "ExpressionStatement") {
+      const e = capProgram[0].expression;
+      const fn = e.type === "CallExpression" && e.callee ? e.callee : e;
+      if (
+        (fn.type === "ArrowFunctionExpression" || fn.type === "FunctionExpression") &&
+        fn.body.type === "BlockStatement"
+      ) {
+        capInner = fn.body.body;
+        capIifeFn = fn;
+      }
+    }
+    const capDirectives = capIifeFn ? capIifeFn.body.directives || [] : [];
+    const capStmts = [...capDirectives, ...capInner].map((n) => ({ start: n.start, end: n.end }));
+    if (capStmts.length !== stmts.length)
+      throw new Error(
+        `${rel}: the served capture carries ${capStmts.length} statement(s), the reading copy ${stmts.length} — the statement correspondence is gone`,
+      );
+    /** the served capture's own bytes for the reading copy's statements a..b */
+    const captureTextForStatements = (a, b) => captureText.slice(capStmts[a].start, capStmts[b].end);
+
     // ── section assignment: a statement belongs to the last banner above it ─
     const banners = findBanners(lines);
     const secs = [];
@@ -394,7 +431,7 @@ async function main() {
         if (covered[i]) throw new Error(`${rel}: ${block.file} overlaps another block at statement ${i}`);
         covered[i] = true;
       }
-      specials.push({ ...block, A: stmts[a].startLine, B: stmts[b].endLine });
+      specials.push({ ...block, A: stmts[a].startLine, B: stmts[b].endLine, stmtFrom: a, stmtTo: b });
     };
 
     // wrapper head/tail (the `(() => {` and `})();` lines) are non-standalone
@@ -409,6 +446,7 @@ async function main() {
           desc: `Lines 1-${first.startLine - 1}. The inline script opens with a single top-level IIFE (\`(() => {\`); the wrapper head is not standalone, so it is indexed only. Slices are cut inside the body (${slicingMode}); the directive prologue heads the first slice.`,
           A: 1,
           B: first.startLine - 1,
+          wrapper: "head",
         });
       if (last.endLine < lines.length)
         specials.push({
@@ -418,6 +456,7 @@ async function main() {
           desc: `Lines ${last.endLine + 1}-${lines.length}. The IIFE invocation tail (\`})();\`) is not standalone, so it is indexed only.`,
           A: last.endLine + 1,
           B: lines.length,
+          wrapper: "tail",
         });
     }
 
@@ -512,6 +551,17 @@ async function main() {
         });
       } else {
         perFileSkipped++;
+        // the SERVED capture's own bytes for this region — the derived text
+        // the public-export-name gate compares against the pristine, so the
+        // tail is never rebuilt from the pristine's own lines.
+        const tailText =
+          b.wrapper === "head"
+            ? captureText.slice(0, capStmts[0].start)
+            : b.wrapper === "tail"
+              ? captureText.slice(capStmts[capStmts.length - 1].end)
+              : b.stmtFrom != null
+                ? captureTextForStatements(b.stmtFrom, b.stmtTo)
+                : null;
         sections.push({
           file: b.file,
           skipped: true,
@@ -522,6 +572,7 @@ async function main() {
           sourceFile,
           firstLine: lines[b.A - 1],
           lastLine: lines[b.B - 1],
+          ...(tailText ? { text: tailText } : {}),
         });
       }
     }
@@ -657,6 +708,7 @@ async function main() {
           tag,
           pretty,
           sourceFile: `readable/${prettyFile}`,
+          captureText: b.text,
         });
       }
     }

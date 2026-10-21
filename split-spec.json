@@ -182,7 +182,8 @@
       "endLine": 1,
       "sourceFile": "readable/index-inline-1.pretty.js",
       "firstLine": "(() => {",
-      "lastLine": "(() => {"
+      "lastLine": "(() => {",
+      "text": "\n(()=>{\n"
     },
     {
       "file": "boot.js",
@@ -202,7 +203,8 @@
       "endLine": 10,
       "sourceFile": "readable/index-inline-1.pretty.js",
       "firstLine": "  if (!window.THREE || !THREE.EffectComposer) {",
-      "lastLine": ""
+      "lastLine": "",
+      "text": "if(!window.THREE||!THREE.EffectComposer){$('err').hidden=false;$('err').textContent='The 3D engine failed to load. Check your connection and reload the page.';return;}"
     },
     {
       "file": "helpers.js",
@@ -231,7 +233,8 @@
       "endLine": 41,
       "sourceFile": "readable/index-inline-1.pretty.js",
       "firstLine": "  try {",
-      "lastLine": "  }"
+      "lastLine": "  }",
+      "text": "try{renderer=new THREE.WebGLRenderer({canvas:glc,antialias:false,powerPreference:'high-performance'});}catch(e){$('err').hidden=false;return;}"
     },
     {
       "file": "renderer-b.js",
@@ -395,7 +398,8 @@
       "endLine": 4441,
       "sourceFile": "readable/index-inline-1.pretty.js",
       "firstLine": "  const sfx = {",
-      "lastLine": ""
+      "lastLine": "",
+      "text": "const sfx={\n  step(){tone('sine',80,40,0.28,0.45);noise('highpass',3600,null,0.7,0.05,0.05);},\n  swing(){humBend(1.45);if(A.swingBufs){const c=A.ctx,src=c.createBufferSource(),g=c.createGain();let i=(Math.random()*A.swingBufs.length)|0;if(i===A.lastSwing)i=(i+1)%A.swingBufs.length;A.lastSwing=i;src.buffer=A.swingBufs[i];src.playbackRate.value=rnd(0.94,1.06);g.gain.value=0.9;src.connect(g);g.connect(A.master);src.start();return;}noise('bandpass',320,2100,1.4,0.36,0.36,0,0.05);},\n  jab(){noise('bandpass',900,2600,1.6,0.18,0.3,0,0.02);humBend(1.3);},\n  cut(p){noise('highpass',2600,null,0.8,0.55,0.34,p);tone('sine',96,36,0.36,0.5,p);noise('lowpass',420,null,1,0.18,0.38,p);},\n  blaster(p,dist){if(A.gunBuf){const c=A.ctx,src=c.createBufferSource(),g=c.createGain();src.buffer=A.gunBuf;src.playbackRate.value=rnd(0.92,1.08);g.gain.value=0.55*clamp(1.25-(dist||8)/22,0.22,1);src.connect(g);g.connect(out(p));src.start();return;}tone('square',1500,170,0.17,0.06,p);tone('sawtooth',900,120,0.12,0.035,p);},\n  deflect(){if(playDeflect(rnd(0.96,1.07),0.8))return;tone('sine',2000,1300,0.15,0.1);noise('bandpass',3200,null,2,0.07,0.12);},\n  reflect(){if(playDeflect(rnd(0.88,0.95),1.0))return;tone('sine',2400,1500,0.22,0.16);tone('square',820,260,0.12,0.06);noise('bandpass',3000,null,2,0.08,0.14);},\n  clank(){noise('bandpass',1800,null,3,0.14,0.22);tone('triangle',340,210,0.12,0.13);},\n  boltHit(p){noise('highpass',2000,null,1,0.2,0.2,p);},\n  ignite(){startMusic();if(A.ignBuf){const c=A.ctx,src=c.createBufferSource(),g=c.createGain();g.gain.value=1;src.buffer=A.ignBuf;src.connect(g);g.connect(A.master);src.start();}\n    if(A.humRec){startRecHum(false);return;}if(A.ignBuf)return;\n    noise('bandpass',160,2600,1,0.75,0.35,0,0.12);return;noise('bandpass',160,2600,1,0.75,0.35,0,0.12);tone('sawtooth',38,58,0.75,0.2);},\n  gripStart(){if(!A.ctx)return;A.gripGain.gain.setTargetAtTime(0.45,A.ctx.currentTime,0.15);tone('sine',62,30,0.6,0.3);},\n  gripStop(){if(!A.ctx)return;A.gripGain.gain.setTargetAtTime(0,A.ctx.currentTime,0.08);},\n  crunch(){noise('lowpass',900,200,1,0.16,0.6);tone('square',90,40,0.1,0.14);},\n  doorHit(){noise('bandpass',900,null,3,0.25,0.4);tone('triangle',190,120,0.4,0.3);noise('highpass',2800,null,1,0.6,0.22);},\n  doorClose(p){tone('sine',90,34,1.1,0.8,p);noise('lowpass',600,90,1,0.6,0.55,p);noise('bandpass',1400,null,5,0.4,0.12,p);},\n  doorStrain(k){noise('bandpass',rnd(260,620),rnd(120,300),6,rnd(0.35,0.7),0.22+0.3*k,0,0.04);tone('sawtooth',rnd(38,62),rnd(28,40),rnd(0.4,0.8),0.08+0.14*k);if(Math.random()<0.5)noise('highpass',3200,null,1,0.12,0.12+0.2*k);},\n  doorRip(){tone('sine',55,22,1.4,1);noise('lowpass',1400,80,1,1.0,0.9);noise('bandpass',700,180,4,1.2,0.5);tone('sawtooth',90,30,0.9,0.3);},\n  doorBreak(){tone('sine',70,26,1.6,1);noise('lowpass',800,60,1,1.2,0.75);noise('bandpass',1100,null,3,0.9,0.3);},\n  zap(p,big){noise('highpass',big?2400:3600,null,0.9,big?0.22:0.08,big?0.22:0.1,p);if(big)tone('square',120,60,0.12,0.05,p);},\n  stressStart(){if(!A.ctx||!A.stressBuf)return;sfx.stressStop(true);const c=A.ctx,src=c.createBufferSource(),g=c.createGain();src.buffer=A.stressBuf;g.gain.value=2.6;src.connect(g);g.connect(A.master);src.start();A.stressSrc=src;A.stressGain=g;},\n  stressStop(now){if(!A.ctx||!A.stressSrc)return;const t=A.ctx.currentTime,src=A.stressSrc;A.stressGain.gain.setTargetAtTime(0,t,now?0.01:0.12);src.stop(t+(now?0.05:0.6));A.stressSrc=null;},\n  saberOut(){if(!A.ctx||!A.spinBuf)return;sfx.saberStop(true);const c=A.ctx,src=c.createBufferSource(),g=c.createGain();src.buffer=A.spinBuf;g.gain.value=1.1;src.connect(g);g.connect(A.master);src.start();A.spinSrc=src;A.spinGain=g;},\n  saberStop(now){if(!A.ctx||!A.spinSrc)return;const t=A.ctx.currentTime,src=A.spinSrc;A.spinGain.gain.setTargetAtTime(0,t,now?0.01:0.06);src.stop(t+(now?0.05:0.35));A.spinSrc=null;},\n  pushWind(){noise('bandpass',220,900,1.2,0.25,0.18,0,0.08);},\n  push(){tone('sine',74,28,0.7,0.9);noise('lowpass',1200,140,1,0.55,0.55);noise('bandpass',500,2400,1.4,0.35,0.22,0,0.02);},\n  detach(){noise('lowpass',200,60,1,3,0.45,0,0.5);tone('sine',48,24,3,0.35);}\n};"
     },
     {
       "file": "state.js",
@@ -541,7 +545,8 @@
       "endLine": 7869,
       "sourceFile": "readable/index-inline-1.pretty.js",
       "firstLine": "})();",
-      "lastLine": "})();"
+      "lastLine": "})();",
+      "text": "\n})();\n"
     }
   ],
   "notRendered": [

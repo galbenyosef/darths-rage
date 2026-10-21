@@ -471,8 +471,26 @@ for (const [, list] of bySource) {
 }
 
 // ── skipped sections: textual re-verification ───────────────────────────
+// The SERVED bytes of every inline content block, keyed by the reading copy
+// that was rendered from it. The frozen export gate's pristines must be .js
+// files, so it can never read this mirror's HTML capture (index.html) as a
+// pristine — the served document is checked HERE, against the record.
+const servedInlineText = new Map();
+for (const capRel of Object.keys(manifest?.files ?? {})) {
+  if (!/\.html$/i.test(capRel)) continue;
+  const buf = fs.readFileSync(path.join(proj, capRel));
+  const entryTag = capRel.replace(/\.html$/i, "").split("/").join("__");
+  for (const b of scanBlocks(buf)) {
+    const twinExt = b.kind === "style" ? "css" : b.kind === "importmap" ? "json" : "js";
+    servedInlineText.set(
+      `readable/${entryTag}-inline-${b.block}.pretty.${twinExt}`,
+      buf.subarray(b.contentStart, b.contentEnd).toString("utf8"),
+    );
+  }
+}
 let skippedOK = 0,
   skippedTotal = 0;
+let staleTail = 0;
 for (const s of sections) {
   if (s.skipped !== true || typeof s.sourceFile !== "string") continue;
   skippedTotal++;
@@ -491,6 +509,21 @@ for (const s of sections) {
   else if (first !== s.firstLine || last !== s.lastLine)
     problem(`skipped section ${s.file}: range text does not match the recorded first/last lines`);
   else skippedOK++;
+  // A tail that records a `text` records the SERVED capture's own bytes for
+  // that region, so the public-export-name gate compares two different files
+  // instead of the pristine with itself. That record must still be the bytes
+  // the server sends: if the served document moved under it, the record is
+  // stale and the gate's comparison would be against text the server no
+  // longer sends.
+  if (typeof s.text === "string") {
+    const served = servedInlineText.get(String(s.sourceFile).split(path.sep).join("/"));
+    if (served === undefined) {
+      problem(`skipped section ${s.file}: records a text but its served capture block was not found`);
+    } else if (!served.includes(s.text)) {
+      problem(`skipped section ${s.file}: the recorded text is no longer present in the served capture block — the record is stale`);
+      staleTail++;
+    }
+  }
 }
 
 // ── rename-map honesty: indices address the recorded identifier tokens ──
@@ -811,6 +844,7 @@ console.log(
   `AUDIT PASS — ${sections.length} spec sections (${roundOK}/${ranged} src↔pretty round-trips byte-exact through the recorded rename map, ` +
     `${renamedSlices} renamed slice(s), ${tiledOK}/${bySource.size} pretty sources tiled contiguously, ` +
     `${skippedOK}/${skippedTotal} skipped non-standalone sections re-verified textually, ` +
+    `${skippedTotal - staleTail}/${skippedTotal} skipped tail texts still present in the served capture, ` +
     `${checkOK}/${onDisk.length} src slices + ${prettyOK}/${prettyParsed} readable/*.pretty.js parse standalone (node --input-type=module --check -), ` +
     `${derivedOK}/${prettyFiles.length} pretties provably distinct from their capture source, ` +
     `${indexOnlyFiles.size} index-only wholeFile/skipped sections carry no src file, ` +
