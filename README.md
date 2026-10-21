@@ -146,6 +146,7 @@ node tools/derive.mjs     # re-cut the derived layers; self-check clean
 node tools/capture.mjs --check       # residual closure audit → 0 new unresolved
 node tools/probe-structure.mjs       # structure evidence (source maps, ESM census, sections)
 node tools/check-exports.mjs         # the derived layer still exports every public name
+node tools/derive.mjs --check          # the derived layer is current? (compares a fresh rebuild; writes NOTHING)
 ```
 
 ## Updating from upstream
