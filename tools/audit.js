@@ -779,8 +779,8 @@ if (manifest) {
 // ── best-effort: re-render every pretty with the pinned prettier 3.9.6 ─
 const prettierCandidates = [
   process.env.PRETTIER_MJS,
+  path.join(proj, "tools", "vendor", "prettier", "index.mjs"),
   path.join(proj, "node_modules", "prettier", "index.mjs"),
-  "D:/repos/mirrors/metropolygonia/node_modules/prettier/index.mjs",
 ].filter(Boolean);
 function loadPinnedPrettier() {
   for (const c of prettierCandidates) {
@@ -796,7 +796,11 @@ function loadPinnedPrettier() {
   return null;
 }
 
-let renderNote = `prettier ${PINNED} not importable — renderOptions recorded, re-render check skipped`;
+let renderNote =
+  `prettier ${PINNED} not importable — renderOptions recorded, re-render check skipped ` +
+  `(tried: ${prettierCandidates.join(", ")}; ` +
+  `fix: restore the vendored copy with git checkout -- tools/vendor/prettier, ` +
+  `or npm install --no-save prettier@${PINNED}, or point PRETTIER_MJS at its index.mjs)`;
 const prettierPath = loadPinnedPrettier();
 if (prettierPath) {
   const prettier = (await import(pathToFileURL(prettierPath).href)).default;

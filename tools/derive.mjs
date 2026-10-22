@@ -92,8 +92,8 @@ const lineOf = (text, offset) => text.slice(0, offset).split("\n").length;
 async function loadPrettier() {
   const candidates = [
     process.env.PRETTIER_MJS,
+    path.join(proj, "tools", "vendor", "prettier", "index.mjs"),
     path.join(proj, "node_modules", "prettier", "index.mjs"),
-    "D:/repos/mirrors/metropolygonia/node_modules/prettier/index.mjs",
   ].filter(Boolean);
   for (const c of candidates) {
     if (!fs.existsSync(c)) continue;
@@ -106,7 +106,14 @@ async function loadPrettier() {
       /* try next */
     }
   }
-  throw new Error(`pinned prettier ${PINNED} not found (set PRETTIER_MJS to its index.mjs)`);
+  throw new Error(
+    `pinned prettier ${PINNED} not found.\n` +
+      `  tried:\n` +
+      candidates.map((c) => `    ${c}`).join("\n") +
+      `\n  fix: restore the vendored copy (git checkout -- tools/vendor/prettier) ` +
+      `or install it (npm install --no-save prettier@${PINNED}), ` +
+      `or point PRETTIER_MJS at its index.mjs`,
+  );
 }
 
 // single pass + idempotency proof: prettier output must be a fixed point of
