@@ -135,6 +135,17 @@ game boots from the captured files alone: the boot evidence in
 the cover shows actual gameplay (Sevrane in the corridor, blade ignited,
 crates and guards in view).
 
+## Boot test (2026-10-27)
+
+- Entry: `http://127.0.0.1:4759/index.html` served by `tools/serve.mjs` with the network blocked (`MAP * 127.0.0.1`).
+- Outcome: **blocked** — the title art and "PRESS ANY KEY TO BOARD THE SHIP" shell appeared, then the page's own guard showed "The 3D engine failed to load. Check your connection and reload the page." and no game canvas started.
+- Evidence: body 105 chars; canvas 300x150 (two unstarted default-size canvases, no rendering); 0 console errors captured; 0 failed same-origin requests, 10 blocked cross-origin (9 jsdelivr three.js r147 scripts + 1 Google Fonts stylesheet); screenshot `docs/boot-2026-10-27.png`.
+- Gaps seen: none (no same-origin 404s — every captured file the page requested was served 200).
+
+This confirms the mirror's existing "needs internet for the nine jsdelivr
+three.js r147 scripts" claim: the capture is not offline-playable by design,
+and the page honestly reports the missing engine instead of rendering.
+
 ## Verify
 
 ```
